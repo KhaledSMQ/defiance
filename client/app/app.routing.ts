@@ -1,22 +1,31 @@
 
 import { Routes, RouterModule } from '@angular/router';
 
-import { LobbyComponent } from './components/lobby/lobby.component';
-import { GameComponent } from './components/game/game.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
+import { GameCreationComponent } from "./components/game-creation/game-creation.component";
 
 const appRoutes: Routes = [
   {
     path: '',
-    redirectTo: '/lobby',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
   },
   {
-    path: 'lobby',
-    component: LobbyComponent
+    path: 'dashboard',
+    component: DashboardComponent
   },
   {
-    path: 'game',
-    component: GameComponent
+    path: 'game/create',
+    component: GameCreationComponent
+  },
+  {
+    path: 'game/:id/lobby',
+    component: GameLobbyComponent
+  },
+  {
+    path: 'game/:id/play',
+    component: GameLobbyComponent
   }
 ];
 

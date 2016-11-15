@@ -3,51 +3,39 @@ import { Injectable } from '@angular/core';
 
 import { Headers, Http, Response } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
-import { Game } from "../models/game";
 
 @Injectable()
-export class LobbyService {
-
-    private url = 'api/games';  // URL to web api
-
+export class RestService {
     constructor(private http: Http) { }
 
-    getGames(): Promise<Game[]> {
-        return this.http.get(this.url)
+    get<T>(url: string): Promise<T> {
+        return this.http
+            .get(url)
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
     }
 
-    getGame(id: string) {
-        return this.http.get(this.url + '/' + id)
-            .toPromise()
-            .then(response => response.json())
-            .catch(this.handleError);
-    }
-
-    private post(game: Game): Promise<Game> {
+    post<T>(url: string, data: T): Promise<T> {
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
 
         return this.http
-            .post(this.url, JSON.stringify(game), { headers: headers })
+            .post(url, JSON.stringify(data), { headers: headers })
             .toPromise()
-            .then(response => response.json().data)
+            .then(response => response.json())
             .catch(this.handleError);
     }
 
-    private put(game: Game) {
+    put<T>(url: string, data: T): Promise<T> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
-        let url = `${this.url}/${game._id}`;
-
         return this.http
-            .put(url, JSON.stringify(game), { headers: headers })
+            .put(url, JSON.stringify(data), { headers: headers })
             .toPromise()
-            .then(() => game)
+            .then(() => data)
             .catch(this.handleError);
     }
 

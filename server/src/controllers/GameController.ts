@@ -11,7 +11,7 @@ class GameController implements IBaseController<GameBusiness> {
             var gameBusiness = new GameBusiness();
             gameBusiness.create(game, (error, result) => {
                 if (error) res.send({ "error": "error" });
-                else res.send({ "success": "success" });
+                else res.send(result);
             });
         }
         catch (e) {

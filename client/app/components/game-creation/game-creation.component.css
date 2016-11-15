@@ -1,0 +1,7 @@
+.active {
+    background-color: lightgreen;
+}
+
+ul.roles li {
+    cursor: pointer;
+}

@@ -5,33 +5,32 @@ import { Game } from "../../models/game";
 import { Router } from '@angular/router';
 
 @Component({
-    selector: 'game',
-    templateUrl: './app/components/game/game.component.html'
+    selector: 'dashboard',
+    templateUrl: './app/components/dashboard/dashboard.component.html'
 })
 
-export class GameComponent implements OnInit {
-
+export class DashboardComponent implements OnInit {
     games: Game[];
-    selectedGame: Game;
+
     error: any;
 
     constructor(
         private router: Router,
         private gameService: GameService) { }
+
     getGames() {
         this.gameService.getGames().then(games => this.games = games);
     }
+
     ngOnInit() {
         this.getGames();
     }
-    onSelect(game: Game) { this.selectedGame = game; }
 
-    gotoDetail() {
-        this.router.navigate(['/detail', this.selectedGame._id]);
+    create() {
+        this.router.navigate(['game', 'create']);
     }
 
-    addHero() {
-        this.selectedGame = null;
-        this.router.navigate(['/detail', 'new']);
+    onSelect(game: Game) {
+        this.router.navigate(['game', game._id, 'lobby']);
     }
 }

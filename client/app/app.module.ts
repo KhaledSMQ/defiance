@@ -7,10 +7,11 @@ import { HttpModule } from '@angular/http';
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
-import { LobbyComponent } from './components/lobby/lobby.component';
-import { GameComponent } from './components/game/game.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { GameCreationComponent } from './components/game-creation/game-creation.component';
+import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
 
-import { LobbyService } from './services/lobby.service';
+import { RestService } from './services/rest.service';
 import { GameService } from './services/game.service';
 
 @NgModule({
@@ -22,11 +23,12 @@ import { GameService } from './services/game.service';
   ],
   declarations: [
     AppComponent,
-    LobbyComponent,
-    GameComponent
+    DashboardComponent,
+    GameCreationComponent,
+    GameLobbyComponent
   ],
   providers: [
-    LobbyService,
+    RestService,
     GameService
   ],
   bootstrap: [AppComponent]

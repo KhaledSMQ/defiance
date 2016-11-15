@@ -11,6 +11,14 @@ class GameSchema {
             name: {
                 type: String,
                 required: true
+            },
+            numberOfPlayers: {
+                type: Number,
+                required: true
+            },
+            roles: {
+                type: Array,
+                required: true
             }
         });
 
