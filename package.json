@@ -2,6 +2,9 @@
     "name": "defiance",
     "version": "0.1.0",
     "description": "Web App",
+    "engines": {
+        "node": "0.6.22 || 0.8.x"
+    },
     "scripts": {
         "clean": "gulp clean",
         "compile": "gulp compile",
@@ -32,7 +35,6 @@
         "@angular/platform-browser-dynamic": "~2.1.0",
         "@angular/router": "~3.1.0",
         "@angular/upgrade": "~2.1.0",
-
         "body-parser": "^1.15.2",
         "bootstrap": "^3.3.7",
         "core-js": "^2.4.1",
