@@ -3,7 +3,8 @@
     "version": "0.1.0",
     "description": "Web App",
     "engines": {
-        "node": "7.1.0"
+        "node": "7.1.0",
+        "npm" : "3.10.9"
     },
     "scripts": {
         "clean": "gulp clean",
