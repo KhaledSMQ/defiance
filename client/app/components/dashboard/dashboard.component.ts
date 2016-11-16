@@ -12,6 +12,8 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
     games: Game[];
 
+    displayedGame: Game;
+
     error: any;
 
     constructor(
@@ -30,7 +32,15 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['game', 'create']);
     }
 
-    onSelect(game: Game) {
+    displayInfo(game: Game) {
+        this.displayedGame = game;
+    }
+
+    closeDisplayInfo() {
+        this.displayedGame = null;
+    }
+
+    join(game: Game) {
         this.router.navigate(['game', game._id, 'lobby']);
     }
 }

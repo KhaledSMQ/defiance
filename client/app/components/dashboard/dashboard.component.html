@@ -10,11 +10,18 @@
     <div class="col-md-12">
         <table class="table table-bordered">
             <tbody>
-                <tr *ngFor="let game of games" [class.active]="game === selectedGame" (click)="onSelect(game)">
-                    <td>{{game.name}}</td>
-                    <td>{{game.players.length}} / {{game.numberOfPlayers}}</td>
+                <tr *ngFor="let game of games" (click)="displayInfo(game)">
+                    <td>{{game?.name}}</td>
+                    <td>{{(game?.players?.length || 0)}} / {{game?.numberOfPlayers}}</td>
+                    <td>
+                        <div (click)="join(game)">Join</div>
+                    </td>
                 </tr>
             </tbody>
         </table>
     </div>
+</div>
+<div *ngIf="displayedGame">
+    <div (click)="closeDisplayInfo()">Close</div>
+    {{displayedGame.name}}
 </div>
