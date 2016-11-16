@@ -14,7 +14,7 @@
                     <td>{{game?.name}}</td>
                     <td>{{(game?.players?.length || 0)}} / {{game?.numberOfPlayers}}</td>
                     <td>
-                        <div (click)="join(game)">Join</div>
+                        <button class="btn btn-success" (click)="join(game)">Join</button>
                     </td>
                 </tr>
             </tbody>
@@ -22,6 +22,5 @@
     </div>
 </div>
 <div *ngIf="displayedGame">
-    <div (click)="closeDisplayInfo()">Close</div>
-    {{displayedGame.name}}
+    <button class="btn btn-danger" (click)="closeDisplayInfo()">Close</button> {{displayedGame.name}}
 </div>
