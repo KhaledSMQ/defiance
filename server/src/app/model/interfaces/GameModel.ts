@@ -7,6 +7,8 @@ interface GameModel extends mongoose.Document {
     numberOfPlayers: number;
 
     roles: string[];
+
+    players: string[];
 }
 
 export = GameModel;

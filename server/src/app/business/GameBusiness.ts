@@ -1,9 +1,9 @@
 
 import GameRepository = require("./../repository/GameRepository");
-import IGameBusiness = require("./interfaces/GameBusiness");
+import IBaseBusiness = require("./interfaces/BaseBusiness");
 import IGameModel = require("./../model/interfaces/GameModel");
 
-class GameBusiness implements IGameBusiness {
+class GameBusiness implements IBaseBusiness<IGameModel> {
     private _gameRepository: GameRepository;
 
     constructor() {
