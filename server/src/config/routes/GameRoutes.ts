@@ -15,9 +15,7 @@ class GameRoutes {
 
         router.get("/games", controller.retrieve);
         router.post("/games", controller.create);
-        router.put("/games/:_id", controller.update);
         router.get("/games/:_id", controller.findById);
-        router.delete("/games/:_id", controller.delete);
 
         return router;
     }
