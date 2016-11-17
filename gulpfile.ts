@@ -86,7 +86,7 @@ gulp.task("serverResources", () => {
  */
 gulp.task("libs", () => {
     return gulp.src([
-        'core-js/client/**',
+        'core-js/client/*',
         'zone.js/dist/zone.js',
         'reflect-metadata/Reflect.js',
         'reflect-metadata/Reflect.js.map',
@@ -100,7 +100,9 @@ gulp.task("libs", () => {
  */
 gulp.task("css", () => {
     return gulp.src([
-        'bootstrap/dist/**/**'
+        'bootstrap/dist/css/*',
+        'bootstrap/dist/fonts/*',
+        'bootstrap/dist/js/*'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/client/css"));
 });
