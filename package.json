@@ -6,7 +6,7 @@
         "node": "7.1.0",
         "npm": "3.10.9"
     },
-    "main" : "dist/server/bin/www",
+    "main": "dist/server/bin/www",
     "scripts": {
         "clean": "gulp clean",
         "compile": "gulp compile",
@@ -14,7 +14,7 @@
         "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
         "postinstall": "gulp installTypings && gulp build",
         "prestart": "gulp build",
-        "start" : "node dist/server/bin/www"
+        "start": "node dist/server/bin/www"
     },
     "repository": {
         "type": "git",
