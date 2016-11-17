@@ -34,6 +34,10 @@ class PlayerBusiness implements IBaseBusiness<IPlayerModel> {
     findById(_id: string, callback: (error: any, result: IPlayerModel) => void) {
         this._playerRepository.findById(_id, callback);
     }
+
+    findByName(name: string, callback: (error: any, result: IPlayerModel) => void) {
+        this._playerRepository.findOneByCriteria({ name: name }, callback);
+    }
 }
 
 Object.seal(PlayerBusiness);

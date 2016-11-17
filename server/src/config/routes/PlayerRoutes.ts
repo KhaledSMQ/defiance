@@ -14,7 +14,8 @@ class PlayerRoutes {
         var controller = this._gameController;
 
         router.post("/players", controller.create);
-        router.get("/players/:_id", controller.findById);
+        router.get("/players/id/:_id", controller.findById);
+        router.get("/players/name/:name", controller.findByName);
 
         return router;
     }

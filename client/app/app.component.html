@@ -8,13 +8,16 @@
 		</button>
         <a class="navbar-brand" href="/#">{{ title }}</a>
     </div>
-    <div class="collapse navbar-collapse navbar-menu-collapse">
+    <div *ngIf="loggedIn" class="collapse navbar-collapse navbar-menu-collapse">
         <ul class="nav navbar-nav navbar-right">
             <li class="active"> <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
             <li class="active"> <a routerLink="/game/create" routerLinkActive="active">Create</a></li>
         </ul>
     </div>
 </nav>
-<div class="container">
+<div *ngIf="!loggedIn">
+    <player-login [LoggedIn]="loggedIn" (LoggedInUpdated)="loggedIn = $event"></player-login>
+</div>
+<div [class.hidden]="!loggedIn" class="container">
     <router-outlet></router-outlet>
 </div>

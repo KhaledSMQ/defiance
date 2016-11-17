@@ -13,10 +13,6 @@ const appRoutes: Routes = [
     pathMatch: 'full'
   },
   {
-    path: 'login',
-    component: PlayerLoginComponent
-  },
-  {
     path: 'dashboard',
     component: DashboardComponent
   },

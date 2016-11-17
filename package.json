@@ -1,71 +1,72 @@
 {
-    "name": "defiance",
-    "version": "0.1.0",
-    "description": "Web App",
-    "engines": {
-        "node": "7.1.0",
-        "npm": "3.10.9"
-    },
-    "main": "dist/server/bin/www",
-    "scripts": {
-        "clean": "gulp clean",
-        "compile": "gulp compile",
-        "build": "gulp build",
-        "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
-        "postinstall": "gulp installTypings",
-        "prestart": "gulp build",
-        "start": "node dist/server/bin/www"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/atomicham/defiance.git"
-    },
-    "keywords": [
-        "Angular2",
-        "Express",
-        "Quick Start",
-        "Gulp",
-        "Typescript"
-    ],
-    "author": "Atomic Ham Studios",
-    "license": "MIT",
-    "dependencies": {
-        "@angular/common": "~2.1.0",
-        "@angular/compiler": "~2.1.0",
-        "@angular/core": "~2.1.0",
-        "@angular/forms": "~2.1.0",
-        "@angular/http": "~2.1.0",
-        "@angular/platform-browser": "~2.1.0",
-        "@angular/platform-browser-dynamic": "~2.1.0",
-        "@angular/router": "~3.1.0",
-        "@angular/upgrade": "~2.1.0",
-        "body-parser": "^1.15.2",
-        "bootstrap": "^3.3.7",
-        "core-js": "^2.4.1",
-        "del": "^2.2.2",
-        "express": "^4.14.0",
-        "gulp-sourcemaps": "2.2.0",
-        "gulp-typescript": "^3.0.1",
-        "gulp-concat": "^2.6.0",
-        "gulp-nodemon": "^2.2.1",
-        "gulp-tslint": "^6.1.2",
-        "gulp-typings": "^2.0.4",
-        "mongoose": "^4.6.1",
-        "reflect-metadata": "^0.1.8",
-        "rxjs": "5.0.0-rc.2",
-        "systemjs": "0.19.40",
-        "typescript": "^2.0.3",
-        "zone.js": "^0.6.25",
-        "concurrently": "^3.0.0",
-        "gulp": "^3.9.1",
-        "method-override": "^2.3.6",
-        "run-sequence": "^1.2.2",
-        "ts-node": "1.7.0",
-        "tslint": "^3.15.1"
-    },
-    "devDependencies": {},
-    "bugs": {
-        "url": "https://github.com/atomicham/defiance/issues"
-    },
-    "homepage": "https://github.com/atomicham/defiance#readme"
+  "name": "defiance",
+  "version": "0.1.0",
+  "description": "Web App",
+  "engines": {
+    "node": "7.1.0",
+    "npm": "3.10.9"
+  },
+  "main": "dist/server/bin/www",
+  "scripts": {
+    "clean": "gulp clean",
+    "compile": "gulp compile",
+    "build": "gulp build",
+    "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
+    "postinstall": "gulp installTypings",
+    "prestart": "gulp build",
+    "start": "node dist/server/bin/www"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/atomicham/defiance.git"
+  },
+  "keywords": [
+    "Angular2",
+    "Express",
+    "Quick Start",
+    "Gulp",
+    "Typescript"
+  ],
+  "author": "Atomic Ham Studios",
+  "license": "MIT",
+  "dependencies": {
+    "@angular/common": "~2.1.0",
+    "@angular/compiler": "~2.1.0",
+    "@angular/core": "~2.1.0",
+    "@angular/forms": "~2.1.0",
+    "@angular/http": "~2.1.0",
+    "@angular/platform-browser": "~2.1.0",
+    "@angular/platform-browser-dynamic": "~2.1.0",
+    "@angular/router": "~3.1.0",
+    "@angular/upgrade": "~2.1.0",
+    "angular2-cookie": "^1.2.5",
+    "body-parser": "^1.15.2",
+    "bootstrap": "^3.3.7",
+    "concurrently": "^3.0.0",
+    "core-js": "^2.4.1",
+    "del": "^2.2.2",
+    "express": "^4.14.0",
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-sourcemaps": "2.2.0",
+    "gulp-tslint": "^6.1.2",
+    "gulp-typescript": "^3.0.1",
+    "gulp-typings": "^2.0.4",
+    "method-override": "^2.3.6",
+    "mongoose": "^4.6.1",
+    "reflect-metadata": "^0.1.8",
+    "run-sequence": "^1.2.2",
+    "rxjs": "5.0.0-rc.2",
+    "systemjs": "0.19.40",
+    "ts-node": "1.7.0",
+    "tslint": "^3.15.1",
+    "typescript": "^2.0.3",
+    "zone.js": "^0.6.25"
+  },
+  "devDependencies": {},
+  "bugs": {
+    "url": "https://github.com/atomicham/defiance/issues"
+  },
+  "homepage": "https://github.com/atomicham/defiance#readme"
 }

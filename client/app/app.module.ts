@@ -16,6 +16,8 @@ import { PlayerLoginComponent } from "./components/player-login/player-login.com
 
 import { RestService } from './services/rest.service';
 import { GameService } from './services/game.service';
+import { PlayerService } from './services/player.service';
+import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule({
   imports: [
@@ -35,7 +37,9 @@ import { GameService } from './services/game.service';
   ],
   providers: [
     RestService,
-    GameService
+    GameService,
+    PlayerService,
+    CookieService
   ],
   bootstrap: [AppComponent]
 })

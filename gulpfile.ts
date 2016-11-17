@@ -49,9 +49,9 @@ gulp.task('build:client', function () {
 gulp.task('tslint', () => {
     return gulp.src("client/app/**/*.ts")
         .pipe(tslint({
-			formatter: "prose"
-		}))
-		.pipe(tslint.report());
+            formatter: "prose"
+        }))
+        .pipe(tslint.report());
 });
 
 

@@ -9,8 +9,8 @@ class PlayerController implements IReadController, IWriteController {
     create(req: express.Request, res: express.Response): void {
         try {
             var game: IPlayerModel = <IPlayerModel>req.body;
-            var gameBusiness = new PlayerBusiness();
-            gameBusiness.create(game, (error, result) => {
+            var playerBusiness = new PlayerBusiness();
+            playerBusiness.create(game, (error, result) => {
                 if (error) res.send({ "error": "error" });
                 else res.send(result);
             });
@@ -25,8 +25,8 @@ class PlayerController implements IReadController, IWriteController {
         try {
             var game: IPlayerModel = <IPlayerModel>req.body;
             var _id: string = req.params._id;
-            var gameBusiness = new PlayerBusiness();
-            gameBusiness.update(_id, game, (error, result) => {
+            var playerBusiness = new PlayerBusiness();
+            playerBusiness.update(_id, game, (error, result) => {
                 if (error) res.send({ "error": "error" });
                 else res.send({ "success": "success" });
             });
@@ -39,9 +39,8 @@ class PlayerController implements IReadController, IWriteController {
 
     retrieve(req: express.Request, res: express.Response): void {
         try {
-
-            var gameBusiness = new PlayerBusiness();
-            gameBusiness.retrieve((error, result) => {
+            var playerBusiness = new PlayerBusiness();
+            playerBusiness.retrieve((error, result) => {
                 if (error) res.send({ "error": "error" });
                 else res.send(result);
             });
@@ -54,11 +53,26 @@ class PlayerController implements IReadController, IWriteController {
 
     findById(req: express.Request, res: express.Response): void {
         try {
-
             var _id: string = req.params._id;
-            var gameBusiness = new PlayerBusiness();
-            gameBusiness.findById(_id, (error, result) => {
+            var playerBusiness = new PlayerBusiness();
+            playerBusiness.findById(_id, (error, result) => {
                 if (error) res.send({ "error": "error" });
+                else res.send(result);
+            });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ "error": "error in your request" });
+        }
+    }
+
+    findByName(req: express.Request, res: express.Response): void {
+        try {
+            var name: string = req.params.name;
+            var playerBusiness = new PlayerBusiness();
+            playerBusiness.findByName(name, (error, result) => {
+                if (error) res.send({ "error": "error" });
+                else if (!result) res.send({ error: "no data" })
                 else res.send(result);
             });
         }
