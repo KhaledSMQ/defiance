@@ -12,7 +12,7 @@
             <tbody>
                 <tr *ngFor="let game of games" (click)="displayInfo(game)">
                     <td>{{game?.name}}</td>
-                    <td>{{(game?.players?.length || 0)}} / {{game?.numberOfPlayers}}</td>
+                    <td>{{(game?.currentPlayerCount)}} / {{game?.numberOfPlayers}}</td>
                     <td>
                         <button class="btn btn-success" (click)="join(game)">Join</button>
                     </td>
