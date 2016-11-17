@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 
 import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { DashboardGameEntryComponent } from './components/dashboard-game-entry/dashboard-game-entry.component';
+import { DashboardGameDetailsComponent } from './components/dashboard-game-details/dashboard-game-details.component';
 import { GameCreationComponent } from './components/game-creation/game-creation.component';
 import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
 
@@ -24,6 +26,8 @@ import { GameService } from './services/game.service';
   declarations: [
     AppComponent,
     DashboardComponent,
+    DashboardGameEntryComponent,
+    DashboardGameDetailsComponent,
     GameCreationComponent,
     GameLobbyComponent
   ],

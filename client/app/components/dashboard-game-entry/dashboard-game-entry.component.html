@@ -1,0 +1,9 @@
+<div class="entry">
+    <div>
+        <div>{{game?.name}}</div>
+        <div>{{(game?.playData?.players?.length || 0)}} / {{game?.numberOfPlayers}}</div>
+    </div>
+    <div>
+        <ng-content></ng-content>
+    </div>
+</div>
