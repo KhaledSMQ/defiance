@@ -50,6 +50,6 @@ export class GameCreationComponent implements OnInit {
     }
 
     cancel(): void {
-        this.router.navigate(['/lobby']);
+        this.router.navigate(['/dashboard']);
     }
 }
