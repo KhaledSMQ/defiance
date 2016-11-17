@@ -12,9 +12,9 @@
         "compile": "gulp compile",
         "build": "gulp build",
         "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
-        "postinstall": "gulp installTypings",
+        "postinstall": "gulp installTypings && gulp build",
         "prestart": "gulp build",
-        "start" : "node ./dist/server/bin/www"
+        "start" : "node dist/server/bin/www"
     },
     "repository": {
         "type": "git",
