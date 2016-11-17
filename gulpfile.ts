@@ -28,7 +28,7 @@ gulp.task('build:server', function () {
         .pipe(tsProject());
     return tsResult.js
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('dist/server'));
+        .pipe(gulp.de ('dist/server'));
 });
 
 gulp.task('build:client', function () {
@@ -86,7 +86,7 @@ gulp.task("serverResources", () => {
  */
 gulp.task("libs", () => {
     return gulp.src([
-        'core-js/client/**',
+        'core-js/client/*',
         'zone.js/dist/zone.js',
         'reflect-metadata/Reflect.js',
         'reflect-metadata/Reflect.js.map',
