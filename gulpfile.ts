@@ -100,7 +100,7 @@ gulp.task("libs", () => {
  */
 gulp.task("css", () => {
     return gulp.src([
-        'bootstrap/dist/**/**'
+        'bootstrap/dist/**/*'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/client/css"));
 });
