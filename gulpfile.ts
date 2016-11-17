@@ -100,7 +100,9 @@ gulp.task("libs", () => {
  */
 gulp.task("css", () => {
     return gulp.src([
-        'bootstrap/dist/**/*'
+        'bootstrap/dist/css/*',
+        'bootstrap/dist/fonts/*',
+        'bootstrap/dist/js/*'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/client/css"));
 });
