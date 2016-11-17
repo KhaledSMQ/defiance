@@ -12,6 +12,7 @@ import { DashboardGameEntryComponent } from './components/dashboard-game-entry/d
 import { DashboardGameDetailsComponent } from './components/dashboard-game-details/dashboard-game-details.component';
 import { GameCreationComponent } from './components/game-creation/game-creation.component';
 import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
+import { PlayerLoginComponent } from "./components/player-login/player-login.component";
 
 import { RestService } from './services/rest.service';
 import { GameService } from './services/game.service';
@@ -29,7 +30,8 @@ import { GameService } from './services/game.service';
     DashboardGameEntryComponent,
     DashboardGameDetailsComponent,
     GameCreationComponent,
-    GameLobbyComponent
+    GameLobbyComponent,
+    PlayerLoginComponent
   ],
   providers: [
     RestService,

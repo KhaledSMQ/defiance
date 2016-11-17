@@ -26,7 +26,17 @@ export class DashboardComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getGames();
+        // check if user is logged in, if so continue and fetch games.
+        if (this.isUserLoggedIn()) {
+            this.getGames();
+        } else {
+            // if not, proceed to login form.
+            this.router.navigate(['login']);
+        }
+    }
+
+    private isUserLoggedIn(): boolean {
+        return true;
     }
 
     create() {

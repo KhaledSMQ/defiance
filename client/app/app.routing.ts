@@ -4,12 +4,17 @@ import { Routes, RouterModule } from '@angular/router';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { GameLobbyComponent } from './components/game-lobby/game-lobby.component';
 import { GameCreationComponent } from "./components/game-creation/game-creation.component";
+import { PlayerLoginComponent } from "./components/player-login/player-login.component";
 
 const appRoutes: Routes = [
   {
     path: '',
     redirectTo: '/dashboard',
     pathMatch: 'full'
+  },
+  {
+    path: 'login',
+    component: PlayerLoginComponent
   },
   {
     path: 'dashboard',
