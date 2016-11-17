@@ -28,7 +28,7 @@ gulp.task('build:server', function () {
         .pipe(tsProject());
     return tsResult.js
         .pipe(sourcemaps.write())
-        .pipe(gulp.de ('dist/server'));
+        .pipe(gulp.dest('dist/server'));
 });
 
 gulp.task('build:client', function () {
