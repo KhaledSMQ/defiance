@@ -29,7 +29,14 @@ export class GameCreationComponent implements OnInit {
 
     createGame(): void {
         if (this.verifyGame()) {
-            this.gameService.createGame(this.game).then(g => this.router.navigate(['game', g._id, 'lobby']));
+            this.gameService.createGame(this.game).then(createdGame => {
+                let res: any = createdGame;
+                if (res.error) {
+
+                } else {
+                    this.router.navigate(['game', createdGame._id, 'lobby']);
+                }
+            });
         }
     }
 
