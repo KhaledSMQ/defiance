@@ -3,6 +3,7 @@ import express = require("express");
 import GameBusiness = require("../app/business/GameBusiness");
 import IReadController = require("./interfaces/ReadController");
 import IWriteController = require("./interfaces/WriteController");
+import GameModel = require("./../app/model/GameModel");
 import IGameModel = require("./../app/model/interfaces/GameModel");
 import IPlayerModel = require("./../app/model/interfaces/PlayerModel");
 
@@ -76,20 +77,17 @@ class GameController implements IReadController, IWriteController {
             gameBusiness.findById(_id, (error, game) => {
                 if (error) res.send({ error: "error" });
                 else {
-                    let players: string[] = <string[]>game.get('players');
-
                     // check status of game to see if joinable.
-                    if (!players) {
+                    if (!game.players) {
                         res.send({ error: "the game has errored" });
                     }
                     else {
-                        if (players.length > 0) {
+                        if (game.players.length > 0) {
                             let player: IPlayerModel = <IPlayerModel>req.body;
-                            let index: number = players.indexOf(player.name);
+                            let index: number = game.players.indexOf(player.name);
 
                             if (index >= 0) {
-                                players.splice(index, 1);
-                                game.set('players', players);
+                                game.players.splice(index, 1);
 
                                 gameBusiness.update(_id, game, (error, result) => {
                                     if (error) res.send({ "error": "error" });
@@ -119,22 +117,18 @@ class GameController implements IReadController, IWriteController {
             gameBusiness.findById(_id, (error: any, game: IGameModel) => {
                 if (error) res.send({ error: "error" });
                 else {
-                    let players: string[] = <string[]>game.get('players');
-                    let numberOfPlayers: number = <number>game.get('numberOfPlayers');
-
                     // check status of game to see if joinable.
-                    if (!players) {
+                    if (!game.players) {
                         res.send({ error: "the game has errored" });
                     }
                     else {
 
-                        if (players.length < numberOfPlayers) {
+                        if (game.players.length < game.numberOfPlayers) {
                             let player: IPlayerModel = <IPlayerModel>req.body;
 
-                            let index: number = players.indexOf(player.name);
+                            let index: number = game.players.indexOf(player.name);
                             if (index < 0) {
-                                players.push(player.name);
-                                game.set('players', players);
+                                game.players.push(player.name);
 
                                 gameBusiness.update(_id, game, (error, result) => {
                                     if (error) res.send({ "error": "error" });

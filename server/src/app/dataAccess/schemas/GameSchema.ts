@@ -12,6 +12,10 @@ class GameSchema {
                 type: String,
                 required: true
             },
+            createdBy: {
+                type: String,
+                required: true
+            },
             numberOfPlayers: {
                 type: Number,
                 required: true

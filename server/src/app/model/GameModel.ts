@@ -15,12 +15,20 @@ class GameModel {
         return this._gameModel.numberOfPlayers;
     }
 
+    get createdBy(): string {
+        return this._gameModel.createdBy;
+    }
+
     get roles(): string[] {
         return this._gameModel.roles;
     }
 
     get players(): string[] {
         return this._gameModel.players;
+    }
+
+    set players(players: string[]) {
+        this._gameModel.players = players;
     }
 }
 
