@@ -87,6 +87,9 @@ class GameController implements IReadController, IWriteController {
                             let index: number = game.players.indexOf(player.name);
 
                             if (index >= 0) {
+                                if (player.name == game.createdBy) {
+                                    console.log("game creator is leaving.");
+                                }
                                 game.players.splice(index, 1);
 
                                 gameBusiness.update(_id, game, (error, result) => {
