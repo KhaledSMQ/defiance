@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
 import { Game } from "../../models/game";
+import { SessionInfo } from "../../session/session-info";
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
 
@@ -20,6 +21,7 @@ export class GameCreationComponent implements OnInit {
         private router: Router,
         private gameService: GameService) {
         this.game = new Game();
+        this.game.createdBy = SessionInfo.Player.name;
     }
 
     ngOnInit(): void {

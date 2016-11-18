@@ -4,7 +4,7 @@ import { CookieService } from "angular2-cookie/core";
 import { Player } from "./models/player";
 import { PlayerService } from "./services/player.service";
 import { Constants } from "./constants/constants";
-import { SessionInfo } from "./constants/session-info";
+import { SessionInfo } from "./session/session-info";
 
 @Component({
     selector: 'my-app',

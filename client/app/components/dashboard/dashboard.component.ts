@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
 import { Game } from "../../models/game";
 import { Router } from '@angular/router';
-import { SessionInfo } from "../../constants/session-info";
+import { SessionInfo } from "../../session/session-info";
 
 @Component({
     selector: 'dashboard',

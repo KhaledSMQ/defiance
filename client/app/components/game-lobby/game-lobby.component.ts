@@ -5,7 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Game } from "../../models/game";
 import { Player } from "../../models/player";
 import { GameService } from "../../services/game.service";
-import { SessionInfo } from "../../constants/session-info";
+import { SessionInfo } from "../../session/session-info";
 
 @Component({
     selector: 'game-lobby',

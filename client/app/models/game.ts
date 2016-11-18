@@ -10,6 +10,8 @@ export class Game {
 
     numberOfPlayers: number;
 
+    createdBy: string;
+
     roles: string[] = [];
 
     players: string[] = [];

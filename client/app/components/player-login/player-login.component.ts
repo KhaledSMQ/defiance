@@ -5,7 +5,7 @@ import { CookieService } from "angular2-cookie/core";
 import { Player } from "../../models/player";
 import { Router } from '@angular/router';
 import { Constants } from "../../constants/constants";
-import { SessionInfo } from "../../constants/session-info";
+import { SessionInfo } from "../../session/session-info";
 
 @Component({
     selector: 'player-login',
