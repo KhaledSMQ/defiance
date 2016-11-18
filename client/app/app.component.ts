@@ -14,6 +14,10 @@ import { SessionInfo } from "./constants/session-info";
 export class AppComponent implements OnInit {
     loggedIn: boolean = false;
 
+    get sessionInfo(): SessionInfo {
+        return SessionInfo;
+    }
+
     title = 'Defiance';
 
     constructor(

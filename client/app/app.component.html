@@ -6,12 +6,13 @@
 			<span class="icon-bar"></span>
 			<span class="icon-bar"></span>
 		</button>
-        <a class="navbar-brand" href="/#">{{ title }}</a>
+        <a *ngIf="!sessionInfo.GameActive" class="navbar-brand" href="/#">{{ title }}</a>
+        <span *ngIf="sessionInfo.GameActive" class="navbar-brand">{{ title }}</span>
     </div>
     <div *ngIf="loggedIn" class="collapse navbar-collapse navbar-menu-collapse">
         <ul class="nav navbar-nav navbar-right">
-            <li class="active"> <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
-            <li class="active"> <a routerLink="/game/create" routerLinkActive="active">Create</a></li>
+            <li *ngIf="!sessionInfo.GameActive" class="active"> <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+            <li *ngIf="!sessionInfo.GameActive" class="active"> <a routerLink="/game/create" routerLinkActive="active">Create</a></li>
         </ul>
     </div>
 </nav>

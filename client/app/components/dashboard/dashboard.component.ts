@@ -48,6 +48,7 @@ export class DashboardComponent implements OnInit {
             if (res.error) {
 
             } else {
+                SessionInfo.GameActive = true;
                 this.router.navigate(['game', game._id, 'lobby']);
             }
         });

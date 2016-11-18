@@ -32,6 +32,7 @@ export class GameLobbyComponent implements OnInit {
             let res: any = leftGame;
             if (res.error && !res.leftGame) {
             } else {
+                SessionInfo.GameActive = false;
                 this.router.navigate(['dashboard']);
             }
         });
