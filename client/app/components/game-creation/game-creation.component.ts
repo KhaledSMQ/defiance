@@ -34,7 +34,10 @@ export class GameCreationComponent implements OnInit {
                 if (res.error) {
 
                 } else {
-                    this.router.navigate(['game', createdGame._id, 'lobby']);
+                    this.gameService.joinGame(createdGame, SessionInfo.Player).then(joinedGame => {
+                        SessionInfo.GameActive = true;
+                        this.router.navigate(['game', createdGame._id, 'lobby']);
+                    });
                 }
             });
         }

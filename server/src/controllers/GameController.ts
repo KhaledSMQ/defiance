@@ -12,6 +12,7 @@ class GameController implements IReadController, IWriteController {
         try {
             var game: IGameModel = <IGameModel>req.body;
             var gameBusiness = new GameBusiness();
+
             gameBusiness.create(game, (error, result) => {
                 if (error) res.send({ "error": "error" });
                 else res.send(result);

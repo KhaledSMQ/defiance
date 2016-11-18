@@ -29,8 +29,7 @@ class GameSchema {
                 required: true
             },
             players: {
-                type: Array,
-                required: true
+                type: Array
             }
         });
 

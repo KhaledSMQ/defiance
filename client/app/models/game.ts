@@ -16,5 +16,5 @@ export class Game {
 
     players: string[] = [];
 
-    options: GameOptions;
+    options: GameOptions = new GameOptions();
 }
