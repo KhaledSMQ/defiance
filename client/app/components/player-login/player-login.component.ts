@@ -5,7 +5,7 @@ import { CookieService } from "angular2-cookie/core";
 import { Player } from "../../models/player";
 import { Router } from '@angular/router';
 import { Constants } from "../../constants/constants";
-import { PlayerInfo } from "../../constants/player-info";
+import { SessionInfo } from "../../constants/session-info";
 
 @Component({
     selector: 'player-login',
@@ -43,7 +43,7 @@ export class PlayerLoginComponent implements OnInit {
 
     setPlayer(player: Player) {
         this.cookieService.put(Constants.UserIdKey, player._id);
-        PlayerInfo.Player = player;
+        SessionInfo.Player = player;
         this.loggedInChange.emit(true);
     }
 
