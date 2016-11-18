@@ -16,7 +16,7 @@
     </div>
 </nav>
 <div *ngIf="!loggedIn">
-    <player-login [LoggedIn]="loggedIn" (LoggedInUpdated)="loggedIn = $event"></player-login>
+    <player-login [(loggedIn)]="loggedIn"></player-login>
 </div>
 <div [class.hidden]="!loggedIn" class="container">
     <router-outlet></router-outlet>

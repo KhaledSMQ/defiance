@@ -14,8 +14,8 @@ import { PlayerInfo } from "../../constants/player-info";
 })
 
 export class PlayerLoginComponent implements OnInit {
-    @Input() LoggedIn: boolean = false;
-    @Output() LoggedInUpdated: EventEmitter<boolean> = new EventEmitter<boolean>();
+    @Input() loggedIn: boolean;
+    @Output() loggedInChange: EventEmitter<boolean> = new EventEmitter<boolean>();
     player: Player;
     error: any;
 
@@ -44,7 +44,7 @@ export class PlayerLoginComponent implements OnInit {
     setPlayer(player: Player) {
         this.cookieService.put(Constants.UserIdKey, player._id);
         PlayerInfo.Player = player;
-        this.LoggedInUpdated.emit(true);
+        this.loggedInChange.emit(true);
     }
 
     ngOnInit() {
