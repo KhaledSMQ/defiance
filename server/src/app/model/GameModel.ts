@@ -18,6 +18,10 @@ class GameModel {
     get roles(): string[] {
         return this._gameModel.roles;
     }
+
+    get players(): string[] {
+        return this._gameModel.players;
+    }
 }
 
 Object.seal(GameModel);

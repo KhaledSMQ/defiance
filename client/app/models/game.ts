@@ -12,15 +12,7 @@ export class Game {
 
     roles: string[] = [];
 
+    players: string[] = [];
+
     options: GameOptions;
-
-    get currentPlayerCount(): number {
-        if (this.playData && this.playData.players) {
-            return this.playData.players.length;
-        } else {
-            return 0;
-        }
-    }
-
-    playData: GamePlayData;
 }

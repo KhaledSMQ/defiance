@@ -19,6 +19,14 @@ class GameSchema {
             roles: {
                 type: Array,
                 required: true
+            },
+            options: {
+                type: Object,
+                required: true
+            },
+            players: {
+                type: Array,
+                required: true
             }
         });
 

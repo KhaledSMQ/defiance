@@ -16,7 +16,8 @@ class GameRoutes {
         router.get("/games", controller.retrieve);
         router.post("/games", controller.create);
         router.get("/games/:_id", controller.findById);
-
+        router.put("/games/:_id/join", controller.join);
+        router.put("/games/:_id/leave", controller.leave);
         return router;
     }
 }

@@ -17,14 +17,14 @@ export class PlayerService {
     }
 
     createPlayer(player: Player): Promise<Player> {
-        return this.restService.post<Player>(this.url, player);
+        return this.restService.post<Player, Player>(this.url, player);
     }
 
     getPlayerById(id: string): Promise<Player> {
         return this.restService.get<Player>(`${this.url}/id/${id}`);
     }
 
-    getPlayerByName(name: string) : Promise<Player> {
+    getPlayerByName(name: string): Promise<Player> {
         return this.restService.get<Player>(`${this.url}/name/${name}`);
     }
 }

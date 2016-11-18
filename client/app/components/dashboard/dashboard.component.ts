@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
 import { Game } from "../../models/game";
 import { Router } from '@angular/router';
+import { SessionInfo } from "../../constants/session-info";
 
 @Component({
     selector: 'dashboard',
@@ -42,6 +43,14 @@ export class DashboardComponent implements OnInit {
     }
 
     join(game: Game) {
-        this.router.navigate(['game', game._id, 'lobby']);
+        this.gameService.joinGame(game, SessionInfo.Player).then(joinedGame => {
+            let res: any = joinedGame;
+            if (res.error) {
+
+            } else {
+                this.router.navigate(['game', game._id, 'lobby']);
+            }
+        });
+
     }
 }

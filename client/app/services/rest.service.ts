@@ -16,7 +16,7 @@ export class RestService {
             .catch(this.handleError);
     }
 
-    post<T>(url: string, data: T): Promise<T> {
+    post<T, R>(url: string, data: T): Promise<R> {
         let headers = new Headers({
             'Content-Type': 'application/json'
         });
@@ -28,14 +28,14 @@ export class RestService {
             .catch(this.handleError);
     }
 
-    put<T>(url: string, data: T): Promise<T> {
+    put<T, R>(url: string, data: T): Promise<R> {
         let headers = new Headers();
         headers.append('Content-Type', 'application/json');
 
         return this.http
             .put(url, JSON.stringify(data), { headers: headers })
             .toPromise()
-            .then(() => data)
+            .then(response => response.json())
             .catch(this.handleError);
     }
 
