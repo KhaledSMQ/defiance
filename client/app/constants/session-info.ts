@@ -2,6 +2,6 @@
 import { Player } from "../models/player";
 
 
-export class PlayerInfo {
+export class SessionInfo {
     static Player: Player;
 }

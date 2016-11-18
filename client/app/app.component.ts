@@ -4,7 +4,7 @@ import { CookieService } from "angular2-cookie/core";
 import { Player } from "./models/player";
 import { PlayerService } from "./services/player.service";
 import { Constants } from "./constants/constants";
-import { PlayerInfo } from "./constants/player-info";
+import { SessionInfo } from "./constants/session-info";
 
 @Component({
     selector: 'my-app',
@@ -26,7 +26,7 @@ export class AppComponent implements OnInit {
         let userId: string = this.getUserIdFromCookie();
 
         if (userId) {
-            this.playerService.getPlayerById(userId).then(player => PlayerInfo.Player = player).then(x => this.loggedIn = true);
+            this.playerService.getPlayerById(userId).then(player => SessionInfo.Player = player).then(x => this.loggedIn = true);
         } else {
             this.loggedIn = false;
         }
