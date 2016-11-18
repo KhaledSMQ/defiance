@@ -8,8 +8,9 @@
 </div>
 <div *ngIf="!displayedGame" class="row">
     <div class="col-md-12">
-        <div *ngFor="let game of games" (click)="displayInfo(game)" class="game-entry">
+        <div *ngFor="let game of games" class="game-entry">
             <dashboard-game-entry [game]="game">
+                <button class="btn btn-info" (click)="displayInfo(game)">Details</button>
                 <button class="btn btn-primary" (click)="join(game)">Join</button>
             </dashboard-game-entry>
         </div>

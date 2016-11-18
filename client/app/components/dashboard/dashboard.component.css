@@ -1,11 +1,6 @@
 .game-entry {
-    cursor: pointer;
     border: 1px solid black;
     margin: 10px;
-}
-
-.game-entry:hover {
-    background-color: lightgray;
 }
 
 .game-details {}
