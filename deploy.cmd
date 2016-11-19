@@ -2,7 +2,7 @@
 
 :: ----------------------
 :: KUDU Deployment Script
-:: Version: 0.2.2
+:: Version: 1.0.9
 :: ----------------------
 
 :: Prerequisites
@@ -69,20 +69,13 @@ IF DEFINED KUDU_SELECT_NODE_VERSION_CMD (
     IF !ERRORLEVEL! NEQ 0 goto error
   )
 
-  IF EXIST "%DEPLOYMENT_TEMP%\__bowerVersion.tmp" (
-	SET /p BOWER_JS_PATH=<"%DEPLOYMENT_TEMP%\__bowerVersion.tmp"
-	IF !ERRORLEVEL! NEQ 0 goto error
-  )
-
   IF NOT DEFINED NODE_EXE (
     SET NODE_EXE=node
   )
 
   SET NPM_CMD="!NODE_EXE!" "!NPM_JS_PATH!"
-  SET BOWER_CMD="./node_modules/.bin/bower.cmd"
 ) ELSE (
   SET NPM_CMD=npm
-  SET BOWER_CMD=bower
   SET NODE_EXE=node
 )
 
@@ -107,25 +100,12 @@ call :SelectNodeVersion
 :: 3. Install npm packages
 IF EXIST "%DEPLOYMENT_TARGET%\package.json" (
   pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !NPM_CMD! install
-  IF !ERRORLEVEL! NEQ 0 goto error
-  popd
-)
-
-:: 4. Install bower packages.
-IF EXIST "%DEPLOYMENT_TARGET%\bower.json" (
-  pushd "%DEPLOYMENT_TARGET%"
-  call :ExecuteCmd !BOWER_CMD! install
+  call :ExecuteCmd !NPM_CMD! install --production
   IF !ERRORLEVEL! NEQ 0 goto error
   popd
 )
 
 ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
-
-:: Post deployment stub
-IF DEFINED POST_DEPLOYMENT_ACTION call "%POST_DEPLOYMENT_ACTION%"
-IF !ERRORLEVEL! NEQ 0 goto error
-
 goto end
 
 :: Execute command routine that will echo out when error
