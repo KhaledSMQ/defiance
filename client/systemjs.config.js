@@ -6,13 +6,16 @@ var isPublic = typeof window != "undefined";
         'app': 'app', // 'dist',
         '@angular': (isPublic) ? '@angular' : 'node_modules/@angular',
         'rxjs': (isPublic) ? 'rxjs' : 'node_modules/rxjs',
-        'angular2-cookie': (isPublic) ? 'angular2-cookie' : 'node_modules/angular2-cookie'
+        'angular2-cookie': (isPublic) ? 'angular2-cookie' : 'node_modules/angular2-cookie',
+        'socket.io-client': (isPublic) ? 'socket.io-client' : 'node_modules/socket.io-client'
     };
+
     // packages tells the System loader how to load when no filename and/or no extension
     var packages = {
         'app': { main: 'main.js', defaultExtension: 'js' },
         'rxjs': { defaultExtension: 'js' },
-        'angular2-cookie': { defaultExtension: 'js' }
+        'angular2-cookie': { defaultExtension: 'js' },
+        'socket.io-client': { main: 'socket.io.js' }
     };
     var ngPackageNames = [
         'common',

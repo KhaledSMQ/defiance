@@ -6,6 +6,7 @@ import IWriteController = require("./interfaces/WriteController");
 import GameModel = require("./../app/model/GameModel");
 import IGameModel = require("./../app/model/interfaces/GameModel");
 import IPlayerModel = require("./../app/model/interfaces/PlayerModel");
+import SocketServer = require("./../sockets/SocketServer");
 
 class GameController implements IReadController, IWriteController {
     create(req: express.Request, res: express.Response): void {
@@ -15,7 +16,10 @@ class GameController implements IReadController, IWriteController {
 
             gameBusiness.create(game, (error, result) => {
                 if (error) res.send({ "error": "error" });
-                else res.send(result);
+                else {
+                    SocketServer.broadcast<IGameModel>("game created", game, "lobby");
+                    res.send(result);
+                }
             });
         }
         catch (e) {
@@ -95,7 +99,10 @@ class GameController implements IReadController, IWriteController {
 
                                 gameBusiness.update(_id, game, (error, result) => {
                                     if (error) res.send({ "error": "error" });
-                                    else res.send(game);
+                                    else {
+                                        SocketServer.broadcast<IGameModel>("game updated", game, "lobby");
+                                        res.send(game);
+                                    }
                                 });
                             } else {
                                 res.send({ error: "player was not in game", leftGame: true });
@@ -136,7 +143,10 @@ class GameController implements IReadController, IWriteController {
 
                                 gameBusiness.update(_id, game, (error, result) => {
                                     if (error) res.send({ "error": "error" });
-                                    else res.send(result);
+                                    else {
+                                        SocketServer.broadcast<IGameModel>("game updated", game, "lobby");
+                                        res.send(result);
+                                    }
                                 });
                             } else {
                                 res.send({ message: "already in game" });
