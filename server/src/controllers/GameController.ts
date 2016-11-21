@@ -17,7 +17,7 @@ class GameController implements IReadController, IWriteController {
             gameBusiness.create(game, (error, result) => {
                 if (error) res.send({ "error": "error" });
                 else {
-                    SocketServer.broadcast<IGameModel>("game created", game, "lobby");
+                    SocketServer.broadcast<IGameModel>("game created", result, "lobby");
                     res.send(result);
                 }
             });
