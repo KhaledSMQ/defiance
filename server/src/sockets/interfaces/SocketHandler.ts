@@ -1,7 +1,7 @@
 
 
 interface SocketHandler {
-    onRegister(io: any, socket: any): void;
+    onRegister(io: SocketIO.Server, socket: SocketIO.Socket): void;
 }
 
 export = SocketHandler;

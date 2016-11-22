@@ -3,10 +3,10 @@ import HandlerRegistrar = require("./HandlerRegistrar");
 import MiddlewareRegistrar = require("./MiddlewareRegistrar");
 
 class SocketServer {
-    static io: any;
+    static io: SocketIO.Server;
 
     static broadcast<T>(id: string, data: T, channel?: string) {
-        let io: any = SocketServer.io;
+        let io: SocketIO.Server = SocketServer.io;
 
         if (channel) {
             io.to(channel).emit(id, data);
@@ -15,7 +15,7 @@ class SocketServer {
         }
     }
 
-    static start(io: any) {
+    static start(io: SocketIO.Server) {
         SocketServer.io = io;
 
         let middlewareRegistrator = new MiddlewareRegistrar();
@@ -25,7 +25,7 @@ class SocketServer {
         }
 
         console.log("Registering IO on 'connection'...");
-        io.on('connection', (socket) => {
+        io.on('connection', (socket: SocketIO.Socket) => {
             console.log('user connected');
 
             socket.on('disconnect', function () {

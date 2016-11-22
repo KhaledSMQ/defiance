@@ -1,7 +1,7 @@
 
 
 interface SocketMiddleware {
-    process(socket: any, next: (err?: any) => void): void;
+    process(socket: SocketIO.Socket, next: (err?: any) => void): void;
 }
 
 export = SocketMiddleware;
