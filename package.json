@@ -13,6 +13,7 @@
     "build": "gulp build",
     "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/index.js\"",
     "debug" : "node --debug-brk --nolazy ./dist/server/index.js",
+    "postinstall" : "gulp installTypings",
     "start": "node dist/server/index.js"
   },
   "repository": {
