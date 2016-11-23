@@ -1,0 +1,16 @@
+<h3>{{game?.name}}</h3>
+<div class="row">
+    <div *ngFor="let player of game?.players" (click)="gotoDetail(player)" class="col-md-3">
+        <div class="module player">
+            <h3>{{player}}</h3>
+        </div>
+    </div>
+
+    <div *ngFor="let role of game?.roles">
+        {{role}}
+    </div>
+</div>
+<div>
+    <button class="btn btn-danger " (click)="leave()">Leave Game</button>
+    <button class="btn btn-success " (click)="setReady()">Ready</button>
+</div>

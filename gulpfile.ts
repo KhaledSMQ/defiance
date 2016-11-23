@@ -1,3 +1,5 @@
+/// <reference path="./typings/index.d.ts" />
+
 "use strict";
 
 const gulp = require("gulp"),
@@ -22,22 +24,22 @@ gulp.task('clean', (cb) => {
  * Build Express server
  */
 gulp.task('build:server', function () {
-    var tsProject = tsc.createProject('server/tsconfig.json');
-    var tsResult = gulp.src('server/src/**/*.ts')
+    var tsProject = tsc.createProject('src/server/tsconfig.json');
+    var tsResult = gulp.src('src/server/**/*.ts')
         .pipe(sourcemaps.init())
         .pipe(tsProject());
     return tsResult.js
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write({ includeContent: false, sourceRoot: __dirname + '/src/server' }))
         .pipe(gulp.dest('dist/server'));
 });
 
 gulp.task('build:client', function () {
-    var tsProject = tsc.createProject('client/tsconfig.json');
-    var tsResult = gulp.src('client/**/*.ts')
+    var tsProject = tsc.createProject('src/client/tsconfig.json');
+    var tsResult = gulp.src('src/client/**/*.ts')
         .pipe(sourcemaps.init())
         .pipe(tsProject());
     return tsResult.js
-        .pipe(sourcemaps.write())
+        .pipe(sourcemaps.write("."))
         .pipe(gulp.dest('dist/client'));
 });
 
@@ -45,40 +47,19 @@ gulp.task('build:client', function () {
  * Lint all custom TypeScript files.
  */
 gulp.task('tslint', () => {
-    return gulp.src("client/app/**/*.ts")
+    return gulp.src("src/client/app/**/*.ts")
         .pipe(tslint({
-			formatter: "prose"
-		}))
-		.pipe(tslint.report());
-});
-
-
-/**
- * Compile TypeScript sources and create sourcemaps in build directory.
- */
-gulp.task("compile", ["tslint"], () => {
-    let tsResult = gulp.src("client/**/*.ts")
-        .pipe(sourcemaps.init())
-        .pipe(tsProject());
-    return tsResult.js
-        .pipe(sourcemaps.write("."))
-        .pipe(gulp.dest("dist/client"));
+            formatter: "prose"
+        }))
+        .pipe(tslint.report());
 });
 
 /**
  * Copy all resources that are not TypeScript files into build directory. e.g. index.html, css, images
  */
 gulp.task("clientResources", () => {
-    return gulp.src(["client/**/*", "!**/*.ts", "!client/typings", "!client/typings/**", "!client/*.json"])
+    return gulp.src(["src/client/**/*", "!**/*.ts", "!src/client/typings", "!src/client/typings/**", "!src/client/*.json"])
         .pipe(gulp.dest("dist/client"));
-});
-
-/**
- * Copy bin directory for www
- */
-gulp.task("serverResources", () => {
-    return gulp.src(["server/src/bin/**"])
-        .pipe(gulp.dest("dist/server/bin"));
 });
 
 /**
@@ -86,7 +67,7 @@ gulp.task("serverResources", () => {
  */
 gulp.task("libs", () => {
     return gulp.src([
-        'core-js/client/**',
+        'core-js/client/*',
         'zone.js/dist/zone.js',
         'reflect-metadata/Reflect.js',
         'reflect-metadata/Reflect.js.map',
@@ -100,7 +81,9 @@ gulp.task("libs", () => {
  */
 gulp.task("css", () => {
     return gulp.src([
-        'bootstrap/dist/**/**'
+        'bootstrap/dist/css/*',
+        'bootstrap/dist/fonts/*',
+        'bootstrap/dist/js/*'
     ], { cwd: "node_modules/**" }) /* Glob required here. */
         .pipe(gulp.dest("dist/client/css"));
 });
@@ -110,7 +93,7 @@ gulp.task("css", () => {
  * Install typings for server and client.
  */
 gulp.task("installTypings", function () {
-    var stream = gulp.src(["./server/typings.json", "./client/typings.json"])
+    var stream = gulp.src(["./src/server/typings.json", "./src/client/typings.json"])
         .pipe(gulpTypings(null)); //will install all typingsfiles in pipeline.
     return stream; // by returning stream gulp can listen to events from the stream and knows when it is finished.
 });
@@ -120,7 +103,7 @@ gulp.task("installTypings", function () {
  */
 gulp.task('start', function () {
     nodemon({
-        script: 'dist/server/bin/www'
+        script: 'dist/server/index.js'
         , ext: 'html js'
         , ignore: ['ignored.js']
         , tasks: ['tslint']
@@ -140,22 +123,22 @@ gulp.task('start', function () {
  */
 
 gulp.task("build", function (callback) {
-    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'serverResources', 'libs', 'css', callback);
+    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'libs', 'css', callback);
 });
 
 /**
  * Watch for changes in TypeScript, HTML and CSS files.
  */
 gulp.task('watch', function () {
-    gulp.watch(["client/**/*.ts"], ['compile']).on('change', function (e) {
+    gulp.watch(["src/client/**/*.ts"], ['build:client']).on('change', function (e) {
         console.log('TypeScript file ' + e.path + ' has been changed. Compiling.');
     });
 
-    gulp.watch(["client/**/*.html", "client/**/*.css"], ['clientResources']).on('change', function (e) {
+    gulp.watch(["src/client/**/*.html", "src/client/**/*.css"], ['clientResources']).on('change', function (e) {
         console.log('Resource file ' + e.path + ' has been changed. Updating.');
     });
 
-    gulp.watch(["server/src/**/*.ts"], ['compile']).on('change', function (e) {
+    gulp.watch(["src/server/**/*.ts"], ['build:server']).on('change', function (e) {
         console.log('TypeScript file ' + e.path + ' has been changed. Compiling.');
     });
 });
@@ -170,9 +153,9 @@ gulp.task('watch', function () {
  */
 
 gulp.task("build", function (callback) {
-    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'serverResources', 'libs', 'css', callback);
+    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'libs', 'css', callback);
 });
 
 gulp.task('default', function () {
-    runSequence('build:server', 'build:client', 'clientResources', 'serverResources', 'libs', 'css', 'watch', 'start');
+    runSequence('build:server', 'build:client', 'clientResources', 'libs', 'css', 'watch', 'start');
 });
