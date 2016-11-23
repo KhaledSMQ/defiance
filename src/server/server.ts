@@ -1,4 +1,4 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="./typings/index.d.ts" />
 
 import express = require('express');
 import BaseRoutes = require("./config/routes/Routes");
