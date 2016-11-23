@@ -1,0 +1,24 @@
+<nav class="navbar navbar-inverse" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-menu-collapse">
+			<span class="sr-only">Toggle navigation</span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+			<span class="icon-bar"></span>
+		</button>
+        <a *ngIf="!sessionInfo.GameActive" class="navbar-brand" href="/#">{{ title }}</a>
+        <span *ngIf="sessionInfo.GameActive" class="navbar-brand">{{ title }}</span>
+    </div>
+    <div *ngIf="loggedIn" class="collapse navbar-collapse navbar-menu-collapse">
+        <ul class="nav navbar-nav navbar-right">
+            <li *ngIf="!sessionInfo.GameActive" class="active"> <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a></li>
+            <li *ngIf="!sessionInfo.GameActive" class="active"> <a routerLink="/game/create" routerLinkActive="active">Create</a></li>
+        </ul>
+    </div>
+</nav>
+<div *ngIf="!loggedIn">
+    <player-login [(loggedIn)]="loggedIn"></player-login>
+</div>
+<div [class.hidden]="!loggedIn" class="container">
+    <router-outlet></router-outlet>
+</div>

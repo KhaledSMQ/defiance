@@ -1,0 +1,24 @@
+<div *ngIf="!displayedGame" class="row">
+    <div class="col-md-12">
+        <div class="error" *ngIf="error">{{error}}</div>
+        <div class="pull-right">
+            <button class="btn btn-success" (click)="create()">Create New Game</button>
+        </div>
+    </div>
+</div>
+<div *ngIf="!displayedGame" class="row">
+    <div class="col-md-12">
+        <div *ngFor="let game of games" class="game-entry">
+            <dashboard-game-entry [game]="game">
+                <button class="btn btn-info" (click)="displayInfo(game)">Details</button>
+                <button class="btn btn-primary" (click)="join(game)">Join</button>
+            </dashboard-game-entry>
+        </div>
+    </div>
+</div>
+<div *ngIf="displayedGame" class="row game-details">
+    <dashboard-game-details [game]="displayedGame">
+        <button class="btn btn-danger " (click)="closeDisplayInfo()">Close</button>
+        <button class="btn btn-primary" (click)="join(displayedGame)" data-loading-text="Joining...">Join</button>
+    </dashboard-game-details>
+</div>

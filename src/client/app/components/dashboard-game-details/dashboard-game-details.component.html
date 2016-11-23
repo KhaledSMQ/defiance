@@ -1,0 +1,12 @@
+<div>
+    <div>
+        <ng-content></ng-content>
+    </div>
+    <div>{{game?.name}}</div>
+    <div>{{(game?.playData?.players?.length || 0)}} / {{game?.numberOfPlayers}}</div>
+    <div>
+        <div *ngFor="let playerId of game?.players">
+            {{playerId}}
+        </div>
+    </div>
+</div>
