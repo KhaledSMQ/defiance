@@ -23,6 +23,10 @@ class GameModel {
         return this._gameModel.roles;
     }
 
+    get items(): string[] {
+        return this._gameModel.items;
+    }
+
     get players(): string[] {
         return this._gameModel.players;
     }

@@ -17,11 +17,20 @@
                             <li (click)="toggleRole('Merlin')" [class.active]="hasRole('Merlin')">Merlin</li>
                             <li (click)="toggleRole('Assassin')" [class.active]="hasRole('Assassin')">Assassin</li>
                             <li (click)="toggleRole('Mordred')" [class.active]="hasRole('Mordred')">Mordred</li>
-
                             <li (click)="toggleRole('Percival')" [class.active]="hasRole('Percival')">Percival</li>
                             <li (click)="toggleRole('Morgana')" [class.active]="hasRole('Morgana')">Morgana</li>
+                            <li (click)="toggleRole('Oberon')" [class.active]="hasRole('Oberon')">Oberon</li>
                         </ul>
                     </td>
+                </tr>
+                <tr>
+                    <td>Items</td>
+                    <td>
+                        <ul class="items">
+                            <li (click)="toggleItem('Lady')" [class.active]="hasItem('Lady')">Lady of the Lake</li>
+                        </ul>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
