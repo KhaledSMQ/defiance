@@ -61,6 +61,19 @@ export class GameCreationComponent implements OnInit {
         return this.game.roles.indexOf(role) >= 0;
     }
 
+    toggleItem(item: string): void {
+        if (this.hasItem(item)) {
+            let index: number = this.game.items.indexOf(item);
+            this.game.items.splice(index, 1);
+        } else {
+            this.game.items.push(item);
+        }
+    }
+
+    hasItem(item: string): boolean {
+        return this.game.items.indexOf(item) >= 0;
+    }
+
     cancel(): void {
         this.router.navigate(['/dashboard']);
     }

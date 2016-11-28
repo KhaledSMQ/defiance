@@ -1,4 +1,4 @@
-/// <reference path="../typings/index.d.ts" />
+/// <reference path="./typings/index.d.ts" />
 
 import express = require('express');
 import BaseRoutes = require("./config/routes/Routes");
@@ -14,6 +14,9 @@ app.set('port', port);
 
 app.use('/app', express.static(path.resolve(__dirname, '../client/app')));
 app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
+
+// for registering https
+app.use('/.well-known', express.static(path.resolve(__dirname, '../../.well-known')));
 
 // for system.js to work. Can be removed if bundling.
 app.use(express.static(path.resolve(__dirname, '../client')));

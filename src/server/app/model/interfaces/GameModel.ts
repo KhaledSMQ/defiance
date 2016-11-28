@@ -10,6 +10,8 @@ interface GameModel extends mongoose.Document {
 
     roles: string[];
 
+    items: string[];
+
     players: string[];
 }
 

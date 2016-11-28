@@ -24,6 +24,10 @@ class GameSchema {
                 type: Array,
                 required: true
             },
+            items: {
+                type: Array,
+                required: true
+            },
             options: {
                 type: Object,
                 required: true

@@ -5,9 +5,12 @@
             <h3>{{player}}</h3>
         </div>
     </div>
-
     <div *ngFor="let role of game?.roles">
         {{role}}
+    </div>
+    <br />
+    <div *ngFor="let item of game?.items">
+        {{item}}
     </div>
 </div>
 <div>

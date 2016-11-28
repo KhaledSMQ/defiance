@@ -6,15 +6,15 @@
     "node": "7.1.0",
     "npm": "3.10.9"
   },
-  "main": "dist/server/bin/www",
+  "main": "dist/server/index.js",
   "scripts": {
     "clean": "gulp clean",
     "compile": "gulp compile",
     "build": "gulp build",
-    "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/bin/www\"",
-    "postinstall": "gulp installTypings",
-    "prestart": "gulp build",
-    "start": "node dist/server/bin/www"
+    "deploy": "concurrently --kill-others \"gulp watch\" \"node ./dist/server/index.js\"",
+    "debug" : "node --debug-brk --nolazy ./dist/server/index.js",
+    "postinstall" : "gulp installTypings",
+    "start": "node dist/server/index.js"
   },
   "repository": {
     "type": "git",

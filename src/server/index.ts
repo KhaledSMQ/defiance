@@ -1,6 +1,5 @@
-#!/usr/bin/env node
 
-var app = require('../server').app;
+var app = require('./server').app;
 var http = require('http');
 var socketServer = require('../sockets/SocketServer');
 
