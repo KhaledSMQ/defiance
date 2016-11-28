@@ -1,12 +1,13 @@
+/// <reference path="./../../typings/globals/socket.io-client/index.d.ts" />
 
 import { Injectable } from "@angular/core";
-
 import { Constants } from "../constants/constants";
-import "socket.io-client";
+
+import * as io from "socket.io-client";
 
 @Injectable()
 export class SocketService {
-    private static _socket: any;
+    private static _socket: SocketIOClient.Socket;
 
     constructor() {
         if (!SocketService._socket) {
@@ -14,7 +15,7 @@ export class SocketService {
         }
     }
 
-    get Socket(): any {
+    get Socket(): SocketIOClient.Socket {
         return SocketService._socket;
     }
 

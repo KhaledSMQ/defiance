@@ -1,7 +1,7 @@
 
 var app = require('./server').app;
 var http = require('http');
-var socketServer = require('../sockets/SocketServer');
+var socketServer = require('./sockets/SocketServer');
 
 var server = http.createServer(app);
 
