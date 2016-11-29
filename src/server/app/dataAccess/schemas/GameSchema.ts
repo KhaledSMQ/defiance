@@ -21,16 +21,13 @@ class GameSchema {
                 required: true
             },
             roles: {
-                type: Array,
-                required: true
+                type: Array
             },
             items: {
-                type: Array,
-                required: true
+                type: Array
             },
             options: {
-                type: Object,
-                required: true
+                type: Object
             },
             players: {
                 type: Array
