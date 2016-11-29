@@ -5,6 +5,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { Game } from "../../models/game";
 import { Player } from "../../models/player";
 import { GameService } from "../../services/game.service";
+import { SocketService } from "../../services/socket.service";
 import { SessionInfo } from "../../session/session-info";
 
 @Component({
@@ -16,10 +17,13 @@ import { SessionInfo } from "../../session/session-info";
 export class GameLobbyComponent implements OnInit {
     game: Game = null;
 
+    playerReady: boolean = false;
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
-        private gameService: GameService) {
+        private gameService: GameService,
+        private socketService: SocketService) {
     }
 
     ngOnInit() {
@@ -38,8 +42,14 @@ export class GameLobbyComponent implements OnInit {
         });
     }
 
-    setReady() {
+    toggleReady() {
+        this.socketService.send("playerReadyStateChange", {
+            player: SessionInfo.Player.name
+         })
+    }
 
+    isGameOwner(): boolean {
+        return this.game.createdBy === SessionInfo.Player.name;
     }
 
     gotoDetail(player: Player) {

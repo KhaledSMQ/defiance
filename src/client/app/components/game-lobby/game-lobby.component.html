@@ -15,5 +15,5 @@
 </div>
 <div>
     <button class="btn btn-danger " (click)="leave()">Leave Game</button>
-    <button class="btn btn-success " (click)="setReady()">Ready</button>
+    <button class="btn " [class.btn-success="playerReady" ] [class.btn-caution="!playerReady" ] (click)="toggleReady()">{{playerReady ? "Ready" : "Unready"}}</button>
 </div>

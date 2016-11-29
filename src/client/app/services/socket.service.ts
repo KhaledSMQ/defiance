@@ -25,7 +25,11 @@ export class SocketService {
         });
     }
 
-    send<T>(id: string, data: T, callback?: any): void {
-        this.Socket.emit(id, data, callback);
+    send<T, U>(id: string, data: T, callback?: (data: U) => void): void {
+        if (callback) {
+            this.Socket.emit(id, data, callback);
+        } else {
+            this.Socket.emit(id, data);
+        }
     }
 }
