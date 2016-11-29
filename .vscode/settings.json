@@ -1,8 +1,9 @@
 {
     "typescript.tsdk": "./node_modules/typescript/lib",
-    "files.exclude" : {
-        "dist" : true,
-        "**/typings" : true,
-        "node_modules" : true
+    "files.exclude": {
+        "dist": true,
+        "**/typings": true,
+        "node_modules": true,
+        "npm-debug.lo*": true
     }
 }

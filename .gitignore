@@ -1,6 +1,7 @@
 # Logs
 logs
 *.log
+npm-debug.lo*
 
 # Runtime data
 pids
@@ -30,6 +31,7 @@ build/Release
 .lock-wscript
 .tsdrc
 .typingsrc
+.env
 
 #IDE configuration files
 .idea
