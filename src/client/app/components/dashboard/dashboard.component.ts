@@ -1,5 +1,5 @@
 
-import { Component, OnInit } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { Game } from "../../models/game";
@@ -12,7 +12,7 @@ import { SessionInfo } from "../../session/session-info";
     styleUrls: ['./app/components/dashboard/dashboard.component.css']
 })
 
-export class DashboardComponent implements OnInit {
+export class DashboardComponent implements AfterViewInit {
     games: Game[];
 
     displayedGame: Game;
@@ -28,10 +28,10 @@ export class DashboardComponent implements OnInit {
         this.gameService.getGames().then(games => this.games = games);
     }
 
-    ngOnInit() {
+    ngAfterViewInit() {
         this.getGames();
-        this.socketService.subscribe<Game>("game created", this.addGame.bind(this));
-        this.socketService.subscribe<Game>("game updated", this.updateGame.bind(this));
+        this.socketService.subscribe<Game>("game created", (d) => this.addGame(d));
+        this.socketService.subscribe<Game>("game updated", (d) => this.updateGame(d));
     }
 
     addGame(game: Game) {

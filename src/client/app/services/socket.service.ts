@@ -19,8 +19,10 @@ export class SocketService {
         return SocketService._socket;
     }
 
-    subscribe<T>(id: string, handler: (data: T) => void): void {
-        this.Socket.on(id, handler);
+    subscribe<T>(id: string, handler: (data: T, socket?: SocketIOClient.Socket) => void): void {
+        this.Socket.on(id, (data) => {
+            handler(data, this.Socket);
+        });
     }
 
     send<T>(id: string, data: T, callback?: any): void {
