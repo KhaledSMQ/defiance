@@ -9,8 +9,7 @@ import { SessionInfo } from "../../session/session-info";
 
 @Component({
     selector: 'player-login',
-    templateUrl: './app/components/player-login/player-login.component.html',
-    styleUrls: ['./app/components/player-login/player-login.component.css']
+    templateUrl: './app/components/player-login/player-login.component.html'
 })
 
 export class PlayerLoginComponent implements OnInit {

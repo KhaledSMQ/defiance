@@ -17,6 +17,7 @@ import { PlayerLoginComponent } from "./components/player-login/player-login.com
 import { RestService } from './services/rest.service';
 import { GameService } from './services/game.service';
 import { PlayerService } from './services/player.service';
+import { SocketService } from "./services/socket.service";
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     FormsModule,
     routing
   ],
+
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -39,7 +41,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
     RestService,
     GameService,
     PlayerService,
-    CookieService
+    CookieService,
+    SocketService
   ],
   bootstrap: [AppComponent]
 })
