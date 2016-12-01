@@ -15,7 +15,7 @@ var isPublic = typeof window != "undefined";
         'app': { main: 'main.js', defaultExtension: 'js' },
         'rxjs': { defaultExtension: 'js' },
         'angular2-cookie': { defaultExtension: 'js' },
-        'socket.io-client': { main: 'socket.io.js' }
+        'socket.io-client': { main: 'dist/socket.io.js' }
     };
     var ngPackageNames = [
         'common',

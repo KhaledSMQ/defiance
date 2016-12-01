@@ -3,7 +3,6 @@ import ISocketHandler = require("../interfaces/SocketHandler");
 
 
 class GameLobbyHandler implements ISocketHandler {
-    io: SocketIO.Server;
     socket: SocketIO.Socket;
 
     onRegister(io: SocketIO.Server, socket: SocketIO.Socket) {
@@ -11,7 +10,7 @@ class GameLobbyHandler implements ISocketHandler {
 
         socket.join("gameLobby")
             .on("playerReadyStateChange", (data, cb) => this.changePlayerReadyState(data, cb))
-            .on("leaveGame", (data) => this.leaveGame(data));
+            .on("leaveLobby", (data) => this.leaveLobby(data));
     }
 
     changePlayerReadyState(data: any, callback: (data: any) => void) {
@@ -19,8 +18,12 @@ class GameLobbyHandler implements ISocketHandler {
         callback(data);
     }
 
-    leaveGame(data: any) {
+    leaveLobby(data: any) {
         this.socket.leave(`gameLobby#${data.game}`);
+
+        if (data.play) {
+            this.socket.join(`gamePlay#${data.game}`);
+        }
     }
 }
 

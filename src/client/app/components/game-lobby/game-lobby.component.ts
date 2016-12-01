@@ -76,7 +76,7 @@ export class GameLobbyComponent implements OnInit {
                 if (res.error && !res.leftGame) {
                 } else {
                     SessionInfo.GameActive = false;
-                    this.socketService.send("leaveGame", { game: leftGame._id });
+                    this.socketService.send("leaveLobby", { game: leftGame._id, play: false });
                     this.router.navigate(['dashboard']);
                 }
             });
@@ -89,6 +89,7 @@ export class GameLobbyComponent implements OnInit {
     }
 
     gameLaunchInitialized(data: any) {
+        this.socketService.send("leaveLobby", { game: this.lobby.game._id, play: true });
         this.router.navigate(['game', this.lobby.game._id, 'play']);
     }
 

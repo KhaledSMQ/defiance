@@ -19,4 +19,8 @@ export class Game {
     items: string[] = [];
 
     options: GameOptions = new GameOptions();
+
+    isPlayerInGame(player: Player): boolean {
+        return this.players && this.players.indexOf(player.name) >= 0;
+    }
 }

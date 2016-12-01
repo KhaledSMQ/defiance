@@ -90,9 +90,11 @@ class GameController {
             let workflow = new GameManagementWorkflow();
 
             workflow.joinGame(id, player,
-                (result) => {
+                (result, resume) => {
                     SocketServer.broadcast<IGameModel>("gameUpdated", result, "dashboardLobby");
-                    SocketServer.io.to(`gameLobby#${id}`).emit("playerJoinedGame", { name: player.name });
+                    if (!resume)
+                        SocketServer.io.to(`gameLobby#${id}`).emit("playerJoinedGame", { name: player.name });
+
                     res.send(result);
                 },
                 (error) => {

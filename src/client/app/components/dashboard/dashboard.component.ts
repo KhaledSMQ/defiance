@@ -3,6 +3,7 @@ import { Component, AfterViewInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { Game } from "../../models/game";
+import { Player } from "../../models/player";
 import { Router } from '@angular/router';
 import { SessionInfo } from "../../session/session-info";
 
@@ -18,6 +19,10 @@ export class DashboardComponent implements AfterViewInit {
     displayedGame: Game;
 
     error: any;
+
+    get player(): Player {
+        return SessionInfo.Player;
+    }
 
     constructor(
         private router: Router,

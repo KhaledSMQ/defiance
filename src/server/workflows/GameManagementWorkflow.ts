@@ -29,7 +29,7 @@ class GameManagementWorkflow {
         });
     }
 
-    joinGame(id: string, player: IPlayerModel, successCallback: (result: IGameModel) => void, errorCallback?: (error: any) => void) {
+    joinGame(id: string, player: IPlayerModel, successCallback: (result: IGameModel, isResume?: boolean) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
         gameBusiness.findById(id, (error: any, game: IGameModel) => {
             if (error) errorCallback({ error: "error" });
@@ -40,20 +40,19 @@ class GameManagementWorkflow {
                 }
                 else {
 
-                    if (game.players.length < game.numberOfPlayers) {
-                        let index: number = game.players.indexOf(player.name);
-                        if (index < 0) {
-                            game.players.push(player.name);
+                    let index: number = game.players.indexOf(player.name);
 
-                            gameBusiness.update(id, game, (error, result) => {
-                                if (error) errorCallback({ "error": "error" });
-                                else {
-                                    successCallback(game);
-                                }
-                            });
-                        } else {
-                            successCallback(game);
-                        }
+                    if (index < 0 && game.players.length < game.numberOfPlayers) {
+                        game.players.push(player.name);
+
+                        gameBusiness.update(id, game, (error, result) => {
+                            if (error) errorCallback({ "error": "error" });
+                            else {
+                                successCallback(game);
+                            }
+                        });
+                    } else if (index >= 0) {
+                        successCallback(game, true);
                     } else {
                         errorCallback({ error: "game is full", gameFull: true });
                     }
