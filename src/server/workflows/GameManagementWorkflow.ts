@@ -52,7 +52,7 @@ class GameManagementWorkflow {
                                 }
                             });
                         } else {
-                            errorCallback({ error: "already in game" });
+                            successCallback(game);
                         }
                     } else {
                         errorCallback({ error: "game is full", gameFull: true });

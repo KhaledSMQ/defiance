@@ -4,25 +4,17 @@ import ISocketHandler = require("../interfaces/SocketHandler");
 
 class DashboardHandler implements ISocketHandler {
     io: SocketIO.Server;
-    roomSocket: SocketIO.Socket;
+    socket: SocketIO.Socket;
 
     onRegister(io: SocketIO.Server, socket: SocketIO.Socket) {
-        this.io = io;
-        this.roomSocket = socket.join("dashboardLobby");
+        this.socket = socket;
 
-        this.roomSocket.on("requestJoinGame", (data) => this.joinGame(data));
+        this.socket.join("dashboardLobby")
+            .on("joinGame", (data) => this.joinGame(data));
     }
 
     joinGame(data: any) {
-        let workflow: GameManagementWorkflow = new GameManagementWorkflow();
-
-        workflow.joinGame(data.id, data.player,
-            (result) => {
-                this.roomSocket.emit("gameJoined", result);
-            },
-            (error) => {
-                this.roomSocket.emit("gameJoined", error);
-            })
+        this.socket.join(`gameLobby#${data.game}`);
     }
 }
 

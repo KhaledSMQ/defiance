@@ -17,6 +17,10 @@ export class GameService {
         return this.restService.get<Game[]>(this.url);
     }
 
+    startGame(game: Game): Promise<Game> {
+        return this.restService.get<Game>(`${this.url}/${game._id}/start`);
+    }
+
     joinGame(game: Game, player: Player): Promise<Game> {
         return this.restService.put<Player, Game>(`${this.url}/${game._id}/join`, player);
     }

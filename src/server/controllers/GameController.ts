@@ -13,7 +13,7 @@ class GameController {
 
             workflow.createGame(game,
                 (result) => {
-                    SocketServer.broadcast<IGameModel>("game created", result, "lobby");
+                    SocketServer.broadcast<IGameModel>("gameCreated", result, "lobby");
                     res.send(result);
                 }, (error) => {
                     res.send(error);
@@ -70,6 +70,7 @@ class GameController {
             workflow.leaveGame(id, player,
                 (result) => {
                     SocketServer.broadcast<IGameModel>("gameUpdated", result, "dashboardLobby");
+                    SocketServer.io.to(`gameLobby#${id}`).emit("playerLeftGame", { name: player.name });
                     res.send(result);
                 },
                 (error) => {
@@ -91,11 +92,24 @@ class GameController {
             workflow.joinGame(id, player,
                 (result) => {
                     SocketServer.broadcast<IGameModel>("gameUpdated", result, "dashboardLobby");
+                    SocketServer.io.to(`gameLobby#${id}`).emit("playerJoinedGame", { name: player.name });
                     res.send(result);
                 },
                 (error) => {
                     res.send(error);
                 });
+        }
+        catch (e) {
+            console.log(e);
+            res.send({ error: "error in your request" });
+        }
+    }
+
+    start(req: express.Request, res: express.Response): void {
+        try {
+            let id: string = req.params._id;
+
+            SocketServer.io.to(`gameLobby#${id}`).emit("gameLaunchInitialized", {});
         }
         catch (e) {
             console.log(e);
