@@ -4,5 +4,4 @@ class Constants {
 }
 
 Object.seal(Constants);
-
 export = Constants;

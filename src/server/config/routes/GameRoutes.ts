@@ -6,11 +6,11 @@ var router = express.Router();
 class GameRoutes {
     private _gameController: GameController;
 
-    constructor () {
+    constructor() {
         this._gameController = new GameController();
     }
-    
-    get routes () {
+
+    get routes() {
         var controller = this._gameController;
 
         router.get("/games", controller.retrieve);
@@ -18,6 +18,7 @@ class GameRoutes {
         router.get("/games/:_id", controller.findById);
         router.put("/games/:_id/join", controller.join);
         router.put("/games/:_id/leave", controller.leave);
+        router.get('/games/:_id/start', controller.start);
         return router;
     }
 }
