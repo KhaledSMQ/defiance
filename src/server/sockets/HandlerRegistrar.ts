@@ -1,17 +1,21 @@
 
 import ISocketHandler = require("./interfaces/SocketHandler");
-import LobbyHandler = require("./handlers/LobbyHandler");
+import DashboardHandler = require("./handlers/DashboardHandler");
+import GameLobbyHandler = require("./handlers/GameLobbyHandler");
 
 class HandlerRegistrar {
-    lobbyHandler: LobbyHandler;
+    dashboardHandler: DashboardHandler;
+    gameLobbyHandler : GameLobbyHandler;
 
     constructor() {
-        this.lobbyHandler = new LobbyHandler();
+        this.dashboardHandler = new DashboardHandler();
+        this.gameLobbyHandler = new GameLobbyHandler();
     }
 
     get Handlers(): ISocketHandler[] {
         return [
-            this.lobbyHandler
+            this.dashboardHandler,
+            this.gameLobbyHandler
         ];
     }
 

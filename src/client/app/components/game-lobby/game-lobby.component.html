@@ -1,19 +1,20 @@
-<h3>{{game?.name}}</h3>
+<h3>{{lobby?.game?.name}}</h3>
 <div class="row">
-    <div *ngFor="let player of game?.players" (click)="gotoDetail(player)" class="col-md-3">
-        <div class="module player">
+    <div *ngFor="let player of lobby?.game?.players" (click)="gotoDetail(player)" class="col-md-3">
+        <div class="module player" [class.ready]="lobby.playerInfo[player]?.ready || (isCurrentPlayer(player) && playerReady)" [class.player]="isCurrentPlayer(player)">
             <h3>{{player}}</h3>
         </div>
     </div>
-    <div *ngFor="let role of game?.roles">
+    <div *ngFor="let role of lobby?.game?.roles">
         {{role}}
     </div>
     <br />
-    <div *ngFor="let item of game?.items">
+    <div *ngFor="let item of lobby?.game?.items">
         {{item}}
     </div>
 </div>
 <div>
-    <button class="btn btn-danger " (click)="leave()">Leave Game</button>
-    <button class="btn btn-success " (click)="setReady()">Ready</button>
+    <button class="btn" [class.btn-danger]="!playerReady" [disabled]="playerReady" (click)="leave()">Leave Game</button>
+    <button class="btn" [class.btn-success]="!playerReady" [class.btn-info]="playerReady" (click)="toggleReady()">{{!playerReady ? "Ready" : "Unready"}}</button>
+    <button *ngIf="isGameOwner" class="btn" [class.btn-success]="allPlayersReady" [disabled]="!allPlayersReady" (click)="launchGame()">Launch</button>
 </div>

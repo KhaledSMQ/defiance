@@ -30,15 +30,15 @@ export class DashboardComponent implements AfterViewInit {
 
     ngAfterViewInit() {
         this.getGames();
-        this.socketService.subscribe<Game>("game created", (d) => this.addGame(d));
-        this.socketService.subscribe<Game>("game updated", (d) => this.updateGame(d));
+        this.socketService.subscribe<Game>("gameCreated", (data) => this.gameCreated(data));
+        this.socketService.subscribe<Game>("gameUpdated", (data) => this.gameUpdated(data));
     }
 
-    addGame(game: Game) {
+    gameCreated(game: Game) {
         this.games.push(game);
     }
 
-    updateGame(game: Game) {
+    gameUpdated(game: Game) {
         let gameIndex: number = this.findGame(game);
 
         if (gameIndex >= 0) {
@@ -75,6 +75,7 @@ export class DashboardComponent implements AfterViewInit {
                 this.error = res.error;
             } else {
                 SessionInfo.GameActive = true;
+                this.socketService.send("joinGame", { game: game._id });
                 this.router.navigate(['game', game._id, 'lobby']);
             }
         });
