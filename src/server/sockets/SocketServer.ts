@@ -1,8 +1,8 @@
 
-import HandlerRegistrar = require("./HandlerRegistrar");
-import MiddlewareRegistrar = require("./MiddlewareRegistrar");
+import { HandlerRegistrar } from "./HandlerRegistrar";
+import { MiddlewareRegistrar } from "./MiddlewareRegistrar";
 
-class SocketServer {
+export class SocketServer {
     static io: SocketIO.Server;
 
     static broadcast<T>(id: string, data: T, channel?: string) {
@@ -41,5 +41,3 @@ class SocketServer {
 
     }
 }
-
-export = SocketServer;

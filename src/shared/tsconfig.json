@@ -1,18 +1,18 @@
 {
     "compilerOptions": {
-        "target": "ES5",
+        "target": "es5",
         "module": "commonjs",
+        "moduleResolution": "node",
         "sourceMap": true,
         "emitDecoratorMetadata": true,
         "experimentalDecorators": true,
         "removeComments": false,
-        "noImplicitAny": false,
-        "baseUrl": ".",
-        "paths": {
-            "shared/*": ["../shared/*"]
-        }
+        "noImplicitAny": false
     },
     "exclude": [
         "typings"
+    ],
+    "types": [
+        "core-js"
     ]
 }

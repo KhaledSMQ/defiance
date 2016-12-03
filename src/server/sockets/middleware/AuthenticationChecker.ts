@@ -1,10 +1,8 @@
 
-import ISocketMiddleware = require("../interfaces/SocketMiddleware");
+import { ISocketMiddleware } from "../interfaces/ISocketMiddleware";
 
-class AuthenticationChecker implements ISocketMiddleware {
+export class AuthenticationChecker implements ISocketMiddleware {
     process(socket: SocketIO.Socket, next: (err?: any) => void): void {
         return next();
     }
 }
-
-export = AuthenticationChecker;

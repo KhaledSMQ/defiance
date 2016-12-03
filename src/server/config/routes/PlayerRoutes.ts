@@ -1,25 +1,22 @@
 
-import express = require("express");
-import PlayerController = require("../../controllers/PlayerController");
+import * as express from "express";
+import { PlayerManagementController } from "../../controllers/PlayerManagementController";
 
 var router = express.Router();
-class PlayerRoutes {
-    private _gameController: PlayerController;
+export class PlayerRoutes {
+    private playerController: PlayerManagementController;
 
     constructor() {
-        this._gameController = new PlayerController();
+        this.playerController = new PlayerManagementController();
     }
 
     get routes() {
-        var controller = this._gameController;
-
-        router.post("/players", controller.create);
-        router.get("/players/id/:_id", controller.findById);
-        router.get("/players/name/:name", controller.findByName);
+        router.post("/players", this.playerController.create);
+        router.get("/players/id/:_id", this.playerController.findById);
+        router.get("/players/name/:name", this.playerController.findByName);
 
         return router;
     }
 }
 
 Object.seal(PlayerRoutes);
-export = PlayerRoutes;

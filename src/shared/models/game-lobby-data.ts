@@ -1,11 +1,12 @@
 
 import { Game } from "./game";
+import { PlayerInfo } from "./player-info";
 
-export class GameLobby {
+export class GameLobbyData {
 
     game: Game;
 
-    playerInfo: { [name: string]: any } = {};
+    playerInfo: { [name: string]: PlayerInfo } = {};
 
     constructor(game: Game) {
         this.game = game;

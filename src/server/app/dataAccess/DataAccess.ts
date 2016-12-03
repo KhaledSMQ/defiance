@@ -1,27 +1,24 @@
 
-import Mongoose = require("mongoose");
-import Constants = require("../../config/constants/constants");
+import * as mongoose from "mongoose";
+import { Constants } from "../../config/constants/constants";
 
-class DataAccess {
+export class DataAccess {
     static mongooseInstance: any;
-    static mongooseConnection: Mongoose.Connection;
+    static mongooseConnection: mongoose.Connection;
 
-    constructor () {
+    constructor() {
         DataAccess.connect();
     }
 
-    static connect (): Mongoose.Connection {
-        if(this.mongooseInstance) return this.mongooseInstance;
+    static connect(): mongoose.Connection {
+        if (this.mongooseInstance) return this.mongooseInstance;
 
-        this.mongooseConnection  = Mongoose.connection;
+        this.mongooseConnection = mongoose.connection;
         this.mongooseConnection.once("open", () => {
             console.log("Connected to mongodb.");
         });
 
-        this.mongooseInstance = Mongoose.connect(Constants.DB_CONNECTION_STRING);
+        this.mongooseInstance = mongoose.connect(Constants.DB_CONNECTION_STRING);
         return this.mongooseInstance;
     }
 }
-
-DataAccess.connect();
-export = DataAccess;

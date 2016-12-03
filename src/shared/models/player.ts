@@ -1,6 +1,6 @@
 
 export class Player {
-    _id : string;
+    id : string;
 
     name: string;
 }

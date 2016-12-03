@@ -1,10 +1,10 @@
 
-import IRead = require("./interfaces/Read");
-import IWrite = require("./interfaces/Write");
+import { IRead } from "./interfaces/IRead";
+import { IWrite } from "./interfaces/IWrite";
 
-import mongoose = require("mongoose");
+import * as  mongoose from "mongoose";
 
-class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
+export class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T> {
 
     private _model: mongoose.Model<mongoose.Document>;
 
@@ -44,5 +44,3 @@ class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IWrite<T>
         return mongoose.Types.ObjectId.createFromHexString(_id)
     }
 }
-
-export = RepositoryBase;

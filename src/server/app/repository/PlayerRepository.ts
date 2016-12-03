@@ -1,13 +1,13 @@
 
-import IPlayerModel = require("./../model/interfaces/PlayerModel");
-import PlayerSchema = require("./../dataAccess/schemas/PlayerSchema");
-import RepositoryBase = require("./BaseRepository");
+import { Player } from "shared/models/player";
+import { ObjectWrapper } from "../schemas/ObjectWrapper";
+import { PlayerSchema } from "../schemas/PlayerSchema";
+import { RepositoryBase } from "./BaseRepository";
 
-class PlayerRepository  extends RepositoryBase<IPlayerModel> {
-    constructor () {
-        super(PlayerSchema);
+export class PlayerRepository extends RepositoryBase<ObjectWrapper<Player>> {
+    constructor() {
+        super(PlayerSchema.mongooseSchema);
     }
 }
 
 Object.seal(PlayerRepository);
-export = PlayerRepository;

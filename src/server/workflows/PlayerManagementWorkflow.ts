@@ -1,9 +1,9 @@
 
-import PlayerBusiness = require("../app/business/PlayerBusiness");
-import IPlayerModel = require("./../app/model/interfaces/PlayerModel");
+import { PlayerBusiness } from "../app/business/PlayerBusiness";
+import { Player } from "shared/models/player";
 
-class PlayerManagementWorkflow {
-    create(player: IPlayerModel, successCallback: (player: any) => void, errorCallback?: (error: any) => void) {
+export class PlayerManagementWorkflow {
+    create(player: Player, successCallback: (player: any) => void, errorCallback?: (error: any) => void) {
         var playerBusiness = new PlayerBusiness();
         playerBusiness.create(player, (error, result) => {
             if (error) errorCallback({ "error": "error" });
@@ -11,7 +11,7 @@ class PlayerManagementWorkflow {
         });
     };
 
-    findById(id: string, successCallback: (player: IPlayerModel) => void, errorCallback?: (error: any) => void) {
+    findById(id: string, successCallback: (player: Player) => void, errorCallback?: (error: any) => void) {
         var playerBusiness = new PlayerBusiness();
         playerBusiness.findById(id, (error, result) => {
             if (error) errorCallback({ "error": "error" });
@@ -19,7 +19,7 @@ class PlayerManagementWorkflow {
         });
     }
 
-    findByName(name: string, successCallback: (player: IPlayerModel) => void, errorCallback?: (error: any) => void) {
+    findByName(name: string, successCallback: (player: Player) => void, errorCallback?: (error: any) => void) {
         var playerBusiness = new PlayerBusiness();
         playerBusiness.findByName(name, (error, result) => {
             if (error) errorCallback({ "error": "error" });
@@ -28,5 +28,3 @@ class PlayerManagementWorkflow {
         });
     }
 }
-
-export = PlayerManagementWorkflow;

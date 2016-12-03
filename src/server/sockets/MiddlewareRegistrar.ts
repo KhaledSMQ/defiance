@@ -1,8 +1,8 @@
 
-import ISocketMiddleware = require("./interfaces/SocketMiddleware");
-import AuthenticationChecker = require("./middleware/AuthenticationChecker");
+import { ISocketMiddleware } from "./interfaces/ISocketMiddleware";
+import { AuthenticationChecker } from "./middleware/AuthenticationChecker";
 
-class MiddlewareRegistrar {
+export class MiddlewareRegistrar {
     authenticationChecker: AuthenticationChecker;
 
     constructor() {
@@ -18,4 +18,3 @@ class MiddlewareRegistrar {
 }
 
 Object.seal(MiddlewareRegistrar);
-export = MiddlewareRegistrar;

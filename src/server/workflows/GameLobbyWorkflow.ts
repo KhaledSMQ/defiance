@@ -1,37 +1,13 @@
 
-import GameBusiness = require("../app/business/GameBusiness");
-import IGameModel = require("./../app/model/interfaces/GameModel");
-import IPlayerModel = require("./../app/model/interfaces/PlayerModel");
+import { GameBusiness } from "../app/business/GameBusiness";
+import { Game } from "shared/models/game";
+import { Player } from "shared/models/player";
 
-class GameManagementWorkflow {
-    retrieveGameById(id: string, successCallback: (result: IGameModel) => void, errorCallback?: (error: any) => void) {
+export class GameLobbyWorkflow {
+
+    joinGameLobby(id: string, player: Player, successCallback: (result: Game, isResume?: boolean) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
-        gameBusiness.findById(id, (error, result) => {
-            if (error) errorCallback({ "error": "error" });
-            else successCallback(result);
-        });
-    }
-
-    retrieveAllGames(successCallback: (result: IGameModel) => void, errorCallback?: (error: any) => void) {
-        var gameBusiness = new GameBusiness();
-        gameBusiness.retrieve((error, result) => {
-            if (error) errorCallback({ "error": "error" });
-            else successCallback(result);
-        });
-    }
-
-    createGame(game: IGameModel, successCallback: (result: IGameModel) => void, errorCallback?: (error: any) => void) {
-        var gameBusiness = new GameBusiness();
-
-        gameBusiness.create(game, (error, result) => {
-            if (error) errorCallback({ "error": "error" });
-            else successCallback(result);
-        });
-    }
-
-    joinGame(id: string, player: IPlayerModel, successCallback: (result: IGameModel, isResume?: boolean) => void, errorCallback?: (error: any) => void) {
-        var gameBusiness = new GameBusiness();
-        gameBusiness.findById(id, (error: any, game: IGameModel) => {
+        gameBusiness.findById(id, (error: any, game: Game) => {
             if (error) errorCallback({ error: "error" });
             else {
                 // check status of game to see if joinable.
@@ -61,7 +37,7 @@ class GameManagementWorkflow {
         });
     }
 
-    leaveGame(id: string, player: IPlayerModel, successCallback: (result: IGameModel) => void, errorCallback?: (error: any) => void) {
+    leaveGameLobby(id: string, player: Player, successCallback: (result: Game) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
 
         gameBusiness.findById(id, (error, game) => {
@@ -98,5 +74,3 @@ class GameManagementWorkflow {
         });
     }
 }
-
-export = GameManagementWorkflow;

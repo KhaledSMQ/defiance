@@ -2,7 +2,6 @@
 
 import { Injectable } from "@angular/core";
 import { Constants } from "../constants/constants";
-
 import * as io from "socket.io-client";
 
 @Injectable()

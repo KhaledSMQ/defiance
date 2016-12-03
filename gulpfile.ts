@@ -43,6 +43,16 @@ gulp.task('build:client', function () {
         .pipe(gulp.dest('dist/client'));
 });
 
+gulp.task('build:shared', function () {
+    var tsProject = tsc.createProject('src/shared/tsconfig.json');
+    var tsResult = gulp.src('src/shared/**/*.ts')
+        .pipe(sourcemaps.init())
+        .pipe(tsProject());
+    return tsResult.js
+        .pipe(sourcemaps.write("."))
+        .pipe(gulp.dest('dist/shared'));
+});
+
 /**
  * Lint all custom TypeScript files.
  */
@@ -123,7 +133,7 @@ gulp.task('start', function () {
  */
 
 gulp.task("build", function (callback) {
-    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'libs', 'css', callback);
+    runSequence('clean', 'build:shared', 'build:server', 'build:client', 'clientResources', 'libs', 'css', callback);
 });
 
 /**
@@ -131,15 +141,19 @@ gulp.task("build", function (callback) {
  */
 gulp.task('watch', function () {
     gulp.watch(["src/client/**/*.ts"], ['build:client']).on('change', function (e) {
-        console.log('TypeScript file ' + e.path + ' has been changed. Compiling.');
+        console.log(`TypeScript file ${e.path} has been changed. Compiling.`);
     });
 
     gulp.watch(["src/client/**/*.html", "src/client/**/*.css"], ['clientResources']).on('change', function (e) {
-        console.log('Resource file ' + e.path + ' has been changed. Updating.');
+        console.log(`Resource file ${e.path} has been changed. Updating.`);
+    });
+
+    gulp.watch(["src/shared/**/*.ts"], ['build:shared']).on('change', function (e) {
+        console.log(`Typescript file ${e.path} has changed. Compiling.`);
     });
 
     gulp.watch(["src/server/**/*.ts"], ['build:server']).on('change', function (e) {
-        console.log('TypeScript file ' + e.path + ' has been changed. Compiling.');
+        console.log(`TypeScript file ${e.path} has been changed. Compiling.`);
     });
 });
 
@@ -153,9 +167,9 @@ gulp.task('watch', function () {
  */
 
 gulp.task("build", function (callback) {
-    runSequence('clean', 'build:server', 'build:client', 'clientResources', 'libs', 'css', callback);
+    runSequence('clean', 'build:shared', 'build:server', 'build:client', 'clientResources', 'libs', 'css', callback);
 });
 
 gulp.task('default', function () {
-    runSequence('build:server', 'build:client', 'clientResources', 'libs', 'css', 'watch', 'start');
+    runSequence('build:shared', 'build:server', 'build:client', 'clientResources', 'libs', 'css', 'watch', 'start');
 });

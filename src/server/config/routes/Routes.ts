@@ -1,19 +1,20 @@
 
-import express = require('express');
-import path = require('path');
+import * as express from "express";
+import * as path from "path";
 
-import GameRoutes = require('./GameRoutes');
-import PlayerRoutes = require('./PlayerRoutes');
+import { GameRoutes } from "./GameRoutes";
+import { PlayerRoutes } from "./PlayerRoutes";
 
-var app = express();
+export class Routes {
+    private app: express.Express;
 
-class Routes {
+    constructor() {
+        this.app = express();
+    }
     get routes() {
-        app.use("/", new GameRoutes().routes);
-        app.use("/", new PlayerRoutes().routes);
+        this.app.use("/", new GameRoutes().routes);
+        this.app.use("/", new PlayerRoutes().routes);
 
-        return app;
+        return this.app;
     }
 }
-
-export = Routes;

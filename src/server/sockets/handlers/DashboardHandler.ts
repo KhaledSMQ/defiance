@@ -1,21 +1,8 @@
 
-import GameManagementWorkflow = require("../../workflows/GameManagementWorkflow");
-import ISocketHandler = require("../interfaces/SocketHandler");
+import { ISocketHandler } from "../interfaces/ISocketHandler";
 
-class DashboardHandler implements ISocketHandler {
-    io: SocketIO.Server;
-    socket: SocketIO.Socket;
-
+export class DashboardHandler implements ISocketHandler {
     onRegister(io: SocketIO.Server, socket: SocketIO.Socket) {
-        this.socket = socket;
-
-        this.socket.join("dashboardLobby")
-            .on("joinGame", (data) => this.joinGame(data));
-    }
-
-    joinGame(data: any) {
-        this.socket.join(`gameLobby#${data.game}`);
+        socket.join("dashboardLobby");
     }
 }
-
-export = DashboardHandler;

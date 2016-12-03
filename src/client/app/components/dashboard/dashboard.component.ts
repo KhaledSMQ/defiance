@@ -1,9 +1,9 @@
 
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
-import { Game } from "../../models/game";
-import { Player } from "../../models/player";
+import { Game } from "shared/models/game";
+import { Player } from "shared/models/player";
 import { Router } from '@angular/router';
 import { SessionInfo } from "../../session/session-info";
 
@@ -13,7 +13,7 @@ import { SessionInfo } from "../../session/session-info";
     styleUrls: ['./app/components/dashboard/dashboard.component.css']
 })
 
-export class DashboardComponent implements AfterViewInit {
+export class DashboardComponent implements OnInit {
     games: Game[];
 
     displayedGame: Game;
@@ -33,7 +33,7 @@ export class DashboardComponent implements AfterViewInit {
         this.gameService.getGames().then(games => this.games = games);
     }
 
-    ngAfterViewInit() {
+    ngOnInit() {
         this.getGames();
         this.socketService.subscribe<Game>("gameCreated", (data) => this.gameCreated(data));
         this.socketService.subscribe<Game>("gameUpdated", (data) => this.gameUpdated(data));
@@ -74,13 +74,12 @@ export class DashboardComponent implements AfterViewInit {
     }
 
     join(game: Game) {
-        this.gameService.joinGame(game, SessionInfo.Player).then(joinedGame => {
+        this.gameService.joinGameLobby(game, SessionInfo.Player).then(joinedGame => {
             let res: any = joinedGame;
             if (res.error) {
                 this.error = res.error;
             } else {
                 SessionInfo.GameActive = true;
-                this.socketService.send("joinGame", { game: game._id });
                 this.router.navigate(['game', game._id, 'lobby']);
             }
         });

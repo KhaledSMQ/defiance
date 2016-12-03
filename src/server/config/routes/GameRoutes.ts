@@ -1,27 +1,28 @@
 
-import express = require("express");
-import GameController = require("../../controllers/GameController");
+import * as express from "express";
+import { GameDashboardController } from "../../controllers/GameDashboardController";
+import { GameLobbyController } from "../../controllers/GameLobbyController";
 
 var router = express.Router();
-class GameRoutes {
-    private _gameController: GameController;
+export class GameRoutes {
+    private gameDashboardController: GameDashboardController;
+    private gameLobbyController: GameLobbyController;
 
     constructor() {
-        this._gameController = new GameController();
+        this.gameDashboardController = new GameDashboardController();
+        this.gameLobbyController = new GameLobbyController();
     }
 
     get routes() {
-        var controller = this._gameController;
+        router.get("/games", this.gameDashboardController.retrieve);
+        router.post("/games", this.gameDashboardController.create);
+        router.get("/games/:_id", this.gameDashboardController.findById);
 
-        router.get("/games", controller.retrieve);
-        router.post("/games", controller.create);
-        router.get("/games/:_id", controller.findById);
-        router.put("/games/:_id/join", controller.join);
-        router.put("/games/:_id/leave", controller.leave);
-        router.get('/games/:_id/start', controller.start);
+        router.put("/games/:_id/join", this.gameLobbyController.joinGameLobby);
+        router.put("/games/:_id/leave", this.gameLobbyController.leaveGameLobby);
+        router.get('/games/:_id/start', this.gameLobbyController.startGame);
         return router;
     }
 }
 
 Object.seal(GameRoutes);
-export = GameRoutes;

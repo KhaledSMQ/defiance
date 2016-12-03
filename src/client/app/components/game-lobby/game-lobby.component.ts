@@ -1,9 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-
-import { GameLobby } from "../../models/game-lobby";
-import { Player } from "../../models/player";
+import { GameLobbyData } from "shared/models/game-lobby-data";
+import { Player } from "shared/models/player";
+import { PlayerInfo } from "shared/models/player-info";
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { SessionInfo } from "../../session/session-info";
@@ -15,7 +15,7 @@ import { SessionInfo } from "../../session/session-info";
 })
 
 export class GameLobbyComponent implements OnInit {
-    lobby: GameLobby = null;
+    lobby: GameLobbyData = null;
 
     playerReady: boolean = false;
 
@@ -28,7 +28,10 @@ export class GameLobbyComponent implements OnInit {
 
     ngOnInit() {
         this.gameService.getGame(this.route.snapshot.params['id'])
-            .then(game => this.lobby = new GameLobby(game));
+            .then(game => {
+                this.lobby = new GameLobbyData(game);
+                this.socketService.send("joinLobby", { game: game._id }, (playerInfoMap: { [name: string]: PlayerInfo }) => this.updatePlayerInfo(playerInfoMap));
+            });
 
         this.socketService.subscribe("playerJoinedGame", (data) => this.playerJoinedGame(data));
         this.socketService.subscribe("playerLeftGame", (data) => this.playerLeftGame(data));
@@ -76,7 +79,7 @@ export class GameLobbyComponent implements OnInit {
                 if (res.error && !res.leftGame) {
                 } else {
                     SessionInfo.GameActive = false;
-                    this.socketService.send("leaveLobby", { game: leftGame._id, play: false });
+                    this.socketService.send("leaveLobby", { game: leftGame._id });
                     this.router.navigate(['dashboard']);
                 }
             });
@@ -88,8 +91,23 @@ export class GameLobbyComponent implements OnInit {
         //todo: ensure the client cannot call multiple times.
     }
 
+    updatePlayerInfo(playerInfoMap: { [name: string]: PlayerInfo }): void {
+        for (let name in playerInfoMap) {
+            let playerInfo: any = playerInfoMap[name];
+            if (this.isCurrentPlayer(name)) {
+                if (playerInfo.ready) {
+                    this.playerReady = true;
+                }
+            } else {
+                playerInfo.player = name;
+
+                this.playerChangedReadyState(playerInfo);
+            }
+        }
+    }
+
     gameLaunchInitialized(data: any) {
-        this.socketService.send("leaveLobby", { game: this.lobby.game._id, play: true });
+        this.socketService.send("leaveLobby", { game: this.lobby.game._id });
         this.router.navigate(['game', this.lobby.game._id, 'play']);
     }
 
@@ -97,18 +115,18 @@ export class GameLobbyComponent implements OnInit {
         this.socketService.send("playerReadyStateChange", {
             player: SessionInfo.Player.name,
             game: this.lobby.game._id,
-            state: !this.playerReady
+            ready: !this.playerReady
         }, (res: any) => {
-            this.playerReady = res.state;
+            this.playerReady = res.ready;
         })
     }
 
     playerChangedReadyState(data: any) {
         let playerInfo = this.lobby.getPlayerInfo(data.player);
         if (!playerInfo) {
-            playerInfo = {};
+            playerInfo = new PlayerInfo();
         }
-        playerInfo.ready = data.state;
+        playerInfo.ready = data.ready;
 
         this.lobby.setPlayerInfo(data.player, playerInfo);
     }

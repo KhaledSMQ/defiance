@@ -1,13 +1,13 @@
 
-import express = require("express");
-import IPlayerModel = require("./../app/model/interfaces/PlayerModel");
-import PlayerBusiness = require("../app/business/PlayerBusiness");
-import PlayerManagementWorkflow = require("../workflows/PlayerManagementWorkflow");
+import * as express from "express";
+import { Player } from "shared/models/player";
+import { PlayerBusiness } from "../app/business/PlayerBusiness";
+import { PlayerManagementWorkflow } from "../workflows/PlayerManagementWorkflow";
 
-class PlayerController {
+export class PlayerManagementController {
     create(req: express.Request, res: express.Response): void {
         try {
-            var game: IPlayerModel = <IPlayerModel>req.body;
+            var game: Player = <Player>req.body;
             let workflow = new PlayerManagementWorkflow();
 
             workflow.create(game,
@@ -62,5 +62,3 @@ class PlayerController {
         }
     }
 }
-
-export = PlayerController;
