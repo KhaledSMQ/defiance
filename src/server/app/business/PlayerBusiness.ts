@@ -12,9 +12,7 @@ export class PlayerBusiness implements IBaseBusiness<IPlayer> {
     }
 
     create(item: IPlayer, callback: (error: any, result: any) => void) {
-        let playerTemp: any = item;
-        let playerModel: PlayerModel = playerTemp;
-        this._playerRepository.create(playerModel, callback);
+        this._playerRepository.create(<PlayerModel>item, callback);
     }
 
     retrieve(callback: (error: any, result: any) => void) {
@@ -22,16 +20,11 @@ export class PlayerBusiness implements IBaseBusiness<IPlayer> {
     }
 
     update(id: string, item: IPlayer, callback: (error: any, result: any) => void) {
-        let playerTemp: any = item;
-        playerTemp._id = id;
-
-        let playerModel: PlayerModel = playerTemp;
-
         this._playerRepository.findById(id, (err, res) => {
             if (err)
                 callback(err, res);
             else
-                this._playerRepository.update(res._id, playerModel, callback);
+                this._playerRepository.update(res._id, <PlayerModel>item, callback);
         });
     }
 
