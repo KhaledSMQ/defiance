@@ -1,10 +1,9 @@
 
-import { Game } from "shared/models/game";
-import { ObjectWrapper } from "../schemas/ObjectWrapper";
+import { GameModel } from "../models/GameModel";
 import { GameSchema } from "../schemas/GameSchema";
 import { RepositoryBase } from "./BaseRepository";
 
-export class GameRepository extends RepositoryBase<ObjectWrapper<Game>> {
+export class GameRepository extends RepositoryBase<GameModel> {
     constructor() {
         super(GameSchema.mongooseSchema);
     }

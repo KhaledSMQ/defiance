@@ -1,19 +1,17 @@
 
 import { GameBusiness } from "../app/business/GameBusiness";
-import { ObjectWrapper } from "../app/schemas/ObjectWrapper";
-import { Game } from "shared/models/game";
-import { Player } from "shared/models/player";
+import { GameModel } from "../app/models/GameModel";
 
 export class GameDashboardWorkflow {
-    retrieveGameById(id: string, successCallback: (result: Game) => void, errorCallback?: (error: any) => void) {
+    retrieveGameById(id: string, successCallback: (result: GameModel) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
         gameBusiness.findById(id, (error, result) => {
             if (error) errorCallback({ "error": "error" });
-            else successCallback(result.value);
+            else successCallback(result);
         });
     }
 
-    retrieveAllGames(successCallback: (result: Game) => void, errorCallback?: (error: any) => void) {
+    retrieveAllGames(successCallback: (result: GameModel) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
         gameBusiness.retrieve((error, result) => {
             if (error) errorCallback({ "error": "error" });
@@ -21,7 +19,7 @@ export class GameDashboardWorkflow {
         });
     }
 
-    createGame(game: Game, successCallback: (result: Game) => void, errorCallback?: (error: any) => void) {
+    createGame(game: GameModel, successCallback: (result: GameModel) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
 
         gameBusiness.create(game, (error, result) => {

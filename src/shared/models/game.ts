@@ -1,10 +1,12 @@
 
+import { IGame } from "./IGame";
 import { Player } from "./player";
 import { GameOptions } from "./game-options";
 import { GamePlayData } from "./game-play-data";
+import { IIndexable } from "./IIndexable";
 
-export class Game {
-    _id: string;
+export class Game implements IGame, IIndexable {
+    id?: string | number;
 
     name: string;
 

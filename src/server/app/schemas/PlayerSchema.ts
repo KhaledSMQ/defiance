@@ -1,11 +1,10 @@
 
 import * as mongoose from "mongoose";
-import { ObjectWrapper } from "./ObjectWrapper";
 import { DataAccess } from "../DataAccess/DataAccess";
-import { Player } from "shared/models/player";
+import { PlayerModel } from "../models/PlayerModel";
 
 export class PlayerSchema {
-    private static mongooseModel: mongoose.Model<ObjectWrapper<Player>>;
+    private static mongooseModel: mongoose.Model<PlayerModel>;
 
     static get objectSchema() {
         var schema = DataAccess.mongooseInstance.Schema({
@@ -18,9 +17,9 @@ export class PlayerSchema {
         return schema;
     }
 
-    static get mongooseSchema(): mongoose.Model<ObjectWrapper<Player>> {
+    static get mongooseSchema(): mongoose.Model<PlayerModel> {
         if (!PlayerSchema.mongooseModel)
-            PlayerSchema.mongooseModel = DataAccess.mongooseConnection.model<ObjectWrapper<Player>>("Players", PlayerSchema.objectSchema);
+            PlayerSchema.mongooseModel = DataAccess.mongooseConnection.model<PlayerModel>("Players", PlayerSchema.objectSchema);
         return PlayerSchema.mongooseModel;
     }
 }
