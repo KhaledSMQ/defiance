@@ -1,9 +1,9 @@
 
 import { PlayerBusiness } from "../app/business/PlayerBusiness";
-import { PlayerModel } from "../app/models/PlayerModel";
+import { IPlayer } from "shared/models/IPlayer";
 
 export class PlayerManagementWorkflow {
-    create(player: PlayerModel, successCallback: (player: any) => void, errorCallback?: (error: any) => void) {
+    create(player: IPlayer, successCallback: (player: any) => void, errorCallback?: (error: any) => void) {
         var playerBusiness = new PlayerBusiness();
         playerBusiness.create(player, (error, result) => {
             if (error) errorCallback({ "error": "error" });
@@ -11,7 +11,7 @@ export class PlayerManagementWorkflow {
         });
     };
 
-    findById(id: string, successCallback: (player: PlayerModel) => void, errorCallback?: (error: any) => void) {
+    findById(id: string, successCallback: (player: IPlayer) => void, errorCallback?: (error: any) => void) {
         var playerBusiness = new PlayerBusiness();
         playerBusiness.findById(id, (error, result) => {
             if (error) errorCallback({ "error": "error" });
@@ -19,7 +19,7 @@ export class PlayerManagementWorkflow {
         });
     }
 
-    findByName(name: string, successCallback: (player: PlayerModel) => void, errorCallback?: (error: any) => void) {
+    findByName(name: string, successCallback: (player: IPlayer) => void, errorCallback?: (error: any) => void) {
         var playerBusiness = new PlayerBusiness();
         playerBusiness.findByName(name, (error, result) => {
             if (error) errorCallback({ "error": "error" });

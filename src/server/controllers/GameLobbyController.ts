@@ -1,20 +1,20 @@
 
 import * as express from "express";
 import { GameLobbyWorkflow } from "../workflows/GameLobbyWorkflow";
-import { Game } from "shared/models/game";
-import { Player } from "shared/models/player";
+import { IGame } from "shared/models/IGame";
+import { IPlayer } from "shared/models/IPlayer";
 import { SocketServer } from "./../sockets/SocketServer";
 
 export class GameLobbyController {
     leaveGameLobby(req: express.Request, res: express.Response): void {
         try {
-            let id: string = req.params._id;
-            let player: Player = <Player>req.body;
+            let id: string = req.params.id;
+            let player: IPlayer = <IPlayer>req.body;
             let workflow = new GameLobbyWorkflow();
 
             workflow.leaveGameLobby(id, player,
                 (result) => {
-                    SocketServer.broadcast<Game>("gameUpdated", result, "dashboardLobby");
+                    SocketServer.broadcast<IGame>("gameUpdated", result, "dashboardLobby");
                     SocketServer.io.to(`gameLobby#${id}`).emit("playerLeftGame", { name: player.name });
                     res.send(result);
                 },
@@ -30,13 +30,13 @@ export class GameLobbyController {
 
     joinGameLobby(req: express.Request, res: express.Response): void {
         try {
-            let id: string = req.params._id;
-            let player: Player = <Player>req.body;
+            let id: string = req.params.id;
+            let player: IPlayer = <IPlayer>req.body;
             let workflow = new GameLobbyWorkflow();
 
             workflow.joinGameLobby(id, player,
                 (result, resume) => {
-                    SocketServer.broadcast<Game>("gameUpdated", result, "dashboardLobby");
+                    SocketServer.broadcast<IGame>("gameUpdated", result, "dashboardLobby");
                     if (!resume)
                         SocketServer.io.to(`gameLobby#${id}`).emit("playerJoinedGame", { name: player.name });
 
@@ -54,7 +54,7 @@ export class GameLobbyController {
 
     startGame(req: express.Request, res: express.Response): void {
         try {
-            let id: string = req.params._id;
+            let id: string = req.params.id;
 
             SocketServer.io.to(`gameLobby#${id}`).emit("gameLaunchInitialized", {});
         }

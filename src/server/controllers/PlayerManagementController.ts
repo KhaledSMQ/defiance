@@ -1,13 +1,13 @@
 
 import * as express from "express";
-import { Player } from "shared/models/player";
+import { IPlayer } from "shared/models/IPlayer";
 import { PlayerBusiness } from "../app/business/PlayerBusiness";
 import { PlayerManagementWorkflow } from "../workflows/PlayerManagementWorkflow";
 
 export class PlayerManagementController {
     create(req: express.Request, res: express.Response): void {
         try {
-            var game: Player = <Player>req.body;
+            var game: IPlayer = <IPlayer>req.body;
             let workflow = new PlayerManagementWorkflow();
 
             workflow.create(game,
@@ -26,10 +26,10 @@ export class PlayerManagementController {
 
     findById(req: express.Request, res: express.Response): void {
         try {
-            var _id: string = req.params._id;
+            var id: string = req.params.id;
             let workflow = new PlayerManagementWorkflow();
 
-            workflow.findById(_id,
+            workflow.findById(id,
                 (result) => {
                     res.send(result);
                 },

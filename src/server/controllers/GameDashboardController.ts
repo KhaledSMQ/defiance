@@ -1,19 +1,18 @@
 
 import * as express from "express";
 import { GameDashboardWorkflow } from "../workflows/GameDashboardWorkflow";
-import { Game } from "shared/models/game";
-import { Player } from "shared/models/player";
+import { IGame } from "shared/models/IGame";
 import { SocketServer } from "./../sockets/SocketServer";
 
 export class GameDashboardController {
     create(req: express.Request, res: express.Response): void {
         try {
-            let game: Game = <Game>req.body;
+            let game: IGame = <IGame>req.body;
             let workflow = new GameDashboardWorkflow();
 
             workflow.createGame(game,
                 (result) => {
-                    SocketServer.broadcast<Game>("gameCreated", result, "dashboardLobby");
+                    SocketServer.broadcast<IGame>("gameCreated", result, "dashboardLobby");
                     res.send(result);
                 }, (error) => {
                     res.send(error);
@@ -44,7 +43,7 @@ export class GameDashboardController {
 
     findById(req: express.Request, res: express.Response): void {
         try {
-            let id: string = req.params._id;
+            let id: string = req.params.id;
             let workflow = new GameDashboardWorkflow();
 
             workflow.retrieveGameById(id,

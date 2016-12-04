@@ -16,11 +16,11 @@ export class GameRoutes {
     get routes() {
         router.get("/games", this.gameDashboardController.retrieve);
         router.post("/games", this.gameDashboardController.create);
-        router.get("/games/:_id", this.gameDashboardController.findById);
+        router.get("/games/:id", this.gameDashboardController.findById);
 
-        router.put("/games/:_id/join", this.gameLobbyController.joinGameLobby);
-        router.put("/games/:_id/leave", this.gameLobbyController.leaveGameLobby);
-        router.get('/games/:_id/start', this.gameLobbyController.startGame);
+        router.put("/games/:id/join", this.gameLobbyController.joinGameLobby);
+        router.put("/games/:id/leave", this.gameLobbyController.leaveGameLobby);
+        router.get('/games/:id/start', this.gameLobbyController.startGame);
         return router;
     }
 }

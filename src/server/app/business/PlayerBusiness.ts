@@ -1,41 +1,49 @@
 
 import { PlayerRepository } from "./../repository/PlayerRepository";
 import { IBaseBusiness } from "./interfaces/IBaseBusiness";
+import { IPlayer } from "shared/models/IPlayer";
 import { PlayerModel } from "../models/PlayerModel";
 
-export class PlayerBusiness implements IBaseBusiness<PlayerModel> {
+export class PlayerBusiness implements IBaseBusiness<IPlayer> {
     private _playerRepository: PlayerRepository;
 
     constructor() {
         this._playerRepository = new PlayerRepository();
     }
 
-    create(item: PlayerModel, callback: (error: any, result: any) => void) {
-        this._playerRepository.create(item, callback);
+    create(item: IPlayer, callback: (error: any, result: any) => void) {
+        let playerTemp: any = item;
+        let playerModel: PlayerModel = playerTemp;
+        this._playerRepository.create(playerModel, callback);
     }
 
     retrieve(callback: (error: any, result: any) => void) {
         this._playerRepository.retrieve(callback);
     }
 
-    update(_id: string, item: PlayerModel, callback: (error: any, result: any) => void) {
-        this._playerRepository.findById(_id, (err, res) => {
+    update(id: string, item: IPlayer, callback: (error: any, result: any) => void) {
+        let playerTemp: any = item;
+        playerTemp._id = id;
+
+        let playerModel: PlayerModel = playerTemp;
+
+        this._playerRepository.findById(id, (err, res) => {
             if (err)
                 callback(err, res);
             else
-                this._playerRepository.update(res._id, item, callback);
+                this._playerRepository.update(res._id, playerModel, callback);
         });
     }
 
-    delete(_id: string, callback: (error: any, result: any) => void) {
-        this._playerRepository.delete(_id, callback);
+    delete(id: string, callback: (error: any, result: any) => void) {
+        this._playerRepository.delete(id, callback);
     }
 
-    findById(_id: string, callback: (error: any, result: PlayerModel) => void) {
-        this._playerRepository.findById(_id, callback);
+    findById(id: string, callback: (error: any, result: IPlayer) => void) {
+        this._playerRepository.findById(id, callback);
     }
 
-    findByName(name: string, callback: (error: any, result: PlayerModel) => void) {
+    findByName(name: string, callback: (error: any, result: IPlayer) => void) {
         this._playerRepository.findOneByCriteria({ name: name }, callback);
     }
 }

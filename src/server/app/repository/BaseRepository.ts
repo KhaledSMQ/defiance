@@ -20,16 +20,16 @@ export class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IW
         this._model.find({}, callback)
     }
 
-    update(_id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
-        this._model.update({ _id: _id }, item, callback);
+    update(id: mongoose.Types.ObjectId, item: T, callback: (error: any, result: any) => void) {
+        this._model.update({ _id: id }, item, callback);
     }
 
-    delete(_id: string, callback: (error: any, result: any) => void) {
-        this._model.remove({ _id: this.toObjectId(_id) }, (err) => callback(err, null));
+    delete(id: string, callback: (error: any, result: any) => void) {
+        this._model.remove({ _id: this.toObjectId(id) }, (err) => callback(err, null));
     }
 
-    findById(_id: string, callback: (error: any, result: T) => void) {
-        this._model.findById(_id, callback);
+    findById(id: string, callback: (error: any, result: T) => void) {
+        this._model.findById(id, callback);
     }
 
     findByCriteria(criteria: any, callback: (error: any, result: T[]) => void): void {
@@ -40,7 +40,7 @@ export class RepositoryBase<T extends mongoose.Document> implements IRead<T>, IW
         this._model.findOne(criteria, callback);
     }
 
-    private toObjectId(_id: string): mongoose.Types.ObjectId {
-        return mongoose.Types.ObjectId.createFromHexString(_id)
+    private toObjectId(id: string): mongoose.Types.ObjectId {
+        return mongoose.Types.ObjectId.createFromHexString(id)
     }
 }

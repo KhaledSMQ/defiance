@@ -46,3 +46,5 @@ export class GameSchema {
         return GameSchema.mongooseModel;
     }
 }
+
+var schema = GameSchema.objectSchema;

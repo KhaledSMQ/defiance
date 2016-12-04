@@ -1,13 +1,13 @@
 
 import { GameBusiness } from "../app/business/GameBusiness";
-import { Game } from "shared/models/game";
-import { Player } from "shared/models/player";
+import { IGame } from "shared/models/IGame";
+import { IPlayer } from "shared/models/IPlayer";
 
 export class GameLobbyWorkflow {
 
-    joinGameLobby(id: string, player: Player, successCallback: (result: Game, isResume?: boolean) => void, errorCallback?: (error: any) => void) {
+    joinGameLobby(id: string, player: IPlayer, successCallback: (result: IGame, isResume?: boolean) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
-        gameBusiness.findById(id, (error: any, game: Game) => {
+        gameBusiness.findById(id, (error: any, game: IGame) => {
             if (error) errorCallback({ error: "error" });
             else {
                 // check status of game to see if joinable.
@@ -37,7 +37,7 @@ export class GameLobbyWorkflow {
         });
     }
 
-    leaveGameLobby(id: string, player: Player, successCallback: (result: Game) => void, errorCallback?: (error: any) => void) {
+    leaveGameLobby(id: string, player: IPlayer, successCallback: (result: IGame) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
 
         gameBusiness.findById(id, (error, game) => {

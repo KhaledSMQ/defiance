@@ -22,3 +22,5 @@ export class DataAccess {
         return this.mongooseInstance;
     }
 }
+
+DataAccess.connect();

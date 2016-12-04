@@ -6,7 +6,7 @@ import { GamePlayData } from "./game-play-data";
 import { IIndexable } from "./IIndexable";
 
 export class Game implements IGame, IIndexable {
-    id?: string | number;
+    _id?: string | number;
 
     name: string;
 

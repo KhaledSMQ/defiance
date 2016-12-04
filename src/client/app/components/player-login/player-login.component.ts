@@ -41,7 +41,7 @@ export class PlayerLoginComponent implements OnInit {
     }
 
     setPlayer(player: Player) {
-        this.cookieService.put(Constants.UserIdKey, player._id);
+        this.cookieService.put(Constants.UserIdKey, <string>player._id);
         SessionInfo.Player = player;
         this.loggedInChange.emit(true);
     }

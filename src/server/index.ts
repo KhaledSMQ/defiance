@@ -11,8 +11,6 @@ var server = http.createServer(app);
 var io = socketIO(server, { serveClient: false });
 SocketServer.start(io);
 
-DataAccess.connect();
-
 server.listen(app.get('port'), function () {
     var host = server.address().address;
     var port = server.address().port;

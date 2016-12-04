@@ -1,5 +1,5 @@
 
 
 export interface IIndexable {
-    id?: string | number;
+    _id?: string | number;
 }

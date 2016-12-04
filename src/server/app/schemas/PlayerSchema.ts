@@ -23,3 +23,5 @@ export class PlayerSchema {
         return PlayerSchema.mongooseModel;
     }
 }
+
+var schema = PlayerSchema.objectSchema;
