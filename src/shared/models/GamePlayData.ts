@@ -17,7 +17,11 @@ export class GamePlayData {
 
     winner: Faction = null;
 
+    playerTurnOrder: string[] = [];
+
+    currentTurn: number;
+
     currentMission: number;
-    
+
     currentTeam: number;
 }

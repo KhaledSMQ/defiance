@@ -1,9 +1,14 @@
 
 import { GamePipeline } from "../pipeline/GamePipeline";
-import { TeamAssignmentComponent } from "../pipeline/components";
+import {
+    GameSetupComponent, TeamAssignmentComponent, MerlinRoleComponent, MordredRoleComponent,
+    AssassinRoleComponent, MorganaRoleComponent, OberonRoleComponent, PercivalRoleComponent
+} from "../pipeline/components";
 import { GamePlayDataCacheService } from "../services/GamePlayDataCacheService";
 import { Game, GamePlayData } from "shared/models";
+import { Roles } from "../../../shared/constants";
 
+import "../../../shared/extensions/ArrayExtensions";
 
 export class GamePlayWorkflow {
     private gamePlayDataCacheService: GamePlayDataCacheService;
@@ -15,9 +20,22 @@ export class GamePlayWorkflow {
     setupPipeline(game: Game): GamePipeline {
         let pipeline: GamePipeline = new GamePipeline();
 
+        pipeline.addComponent(new GameSetupComponent());
         pipeline.addComponent(new TeamAssignmentComponent(game.numberOfPlayers));
 
+        if (game.roles.contains(Roles.Merlin.name))
+            pipeline.addComponent(new MerlinRoleComponent());
+        if (game.roles.contains(Roles.Assassin.name))
+            pipeline.addComponent(new AssassinRoleComponent());
+        if (game.roles.contains(Roles.Mordred.name))
+            pipeline.addComponent(new MordredRoleComponent());
+        if (game.roles.contains(Roles.Morgana.name) && game.roles.contains(Roles.Percival.name)) {
+            pipeline.addComponent(new MorganaRoleComponent());
+            pipeline.addComponent(new PercivalRoleComponent());
+        }
 
+        if (game.roles.contains(Roles.Oberon.name))
+            pipeline.addComponent(new OberonRoleComponent());
 
         return pipeline;
     }
@@ -28,7 +46,8 @@ export class GamePlayWorkflow {
 
         this.gamePlayDataCacheService.set(<string>game._id, gamePlayData);
 
+        console.log(gamePlayData);
+
         return gamePlayData;
     }
-
 }
