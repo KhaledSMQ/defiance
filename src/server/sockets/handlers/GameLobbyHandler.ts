@@ -19,7 +19,7 @@ export class GameLobbyHandler implements ISocketHandler {
 
     changePlayerReadyState(data: any, callback: (data: any) => void) {
         this.socket.in(`gameLobby#${data.game}`).broadcast.emit(SocketEventNames.Server.playerChangedReadyState, data);
-        let playerInfo = this.playerInfoService.getPlayerInfo(data.player);
+        let playerInfo = this.playerInfoService.get(data.player);
         playerInfo.ready = data.ready;
         callback(data);
     }
@@ -31,6 +31,6 @@ export class GameLobbyHandler implements ISocketHandler {
     joinLobby(data: any, callback: (data: any) => void): void {
         this.socket.join(`gameLobby#${data.game}`);
 
-        callback(this.playerInfoService.playerInfoCache);
+        callback(this.playerInfoService.cache);
     }
 }
