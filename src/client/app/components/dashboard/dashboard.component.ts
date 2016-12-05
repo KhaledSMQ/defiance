@@ -35,8 +35,8 @@ export class DashboardComponent implements OnInit {
  
     ngOnInit() { 
         this.getGames();
-        this.socketService.subscribe<Game>(SocketEventNames.Client.gameCreated, (data) => this.gameCreated(data));
-        this.socketService.subscribe<Game>(SocketEventNames.Client.gameUpdated, (data) => this.gameUpdated(data));
+        this.socketService.subscribe<Game>(SocketEventNames.Server.gameCreated, (data) => this.gameCreated(data));
+        this.socketService.subscribe<Game>(SocketEventNames.Server.gameUpdated, (data) => this.gameUpdated(data));
     }
 
     gameCreated(game: Game) {

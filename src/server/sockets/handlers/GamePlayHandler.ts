@@ -1,5 +1,7 @@
 
 import { ISocketHandler } from "../interfaces/ISocketHandler";
+import { SocketEventNames } from "shared/constants"
+
 
 export class GamePlayHandler implements ISocketHandler {
     socket: SocketIO.Socket;
@@ -8,9 +10,9 @@ export class GamePlayHandler implements ISocketHandler {
         this.socket = socket;
 
         socket.join("gamePlay")
-            .on("joinGame", (data, cb) => this.joinGame(data, cb))
-            .on("leaveGame", (data, cb) => this.leaveGame(data, cb))
-            .on("playVote", (data, cb) => this.playVote(data, cb));
+            .on(SocketEventNames.Client.joinGame, (data, cb) => this.joinGame(data, cb))
+            .on(SocketEventNames.Client.leaveGame, (data, cb) => this.leaveGame(data, cb))
+            .on(SocketEventNames.Client.playVote, (data, cb) => this.playVote(data, cb));
     }
 
     leaveGame(data: any, callback: (data) => void) {
@@ -22,7 +24,7 @@ export class GamePlayHandler implements ISocketHandler {
     }
 
     playVote(data: any, callback: (data: any) => void) {
-        this.socket.in(`gamePlay#${data.game}`).broadcast.emit("playerChangedReadyState", data);
+        this.socket.in(`gamePlay#${data.game}`).broadcast.emit(SocketEventNames.Server.playerVotePlayed, data);
         callback(data);
     }
 }

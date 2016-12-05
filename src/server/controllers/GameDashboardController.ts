@@ -2,6 +2,7 @@
 import * as express from "express";
 import { GameDashboardWorkflow } from "../workflows/GameDashboardWorkflow";
 import { IGame } from "shared/models";
+import { SocketEventNames } from "shared/constants"
 import { SocketServer } from "./../sockets/SocketServer";
 
 export class GameDashboardController {
@@ -12,7 +13,7 @@ export class GameDashboardController {
 
             workflow.createGame(game,
                 (result) => {
-                    SocketServer.broadcast<IGame>("gameCreated", result, "dashboardLobby");
+                    SocketServer.broadcast<IGame>(SocketEventNames.Server.gameCreated, result, "dashboardLobby");
                     res.send(result);
                 }, (error) => {
                     res.send(error);

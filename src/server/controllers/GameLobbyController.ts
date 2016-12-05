@@ -2,6 +2,7 @@
 import * as express from "express";
 import { GameLobbyWorkflow } from "../workflows/GameLobbyWorkflow";
 import { IGame, IPlayer } from "shared/models";
+import { SocketEventNames } from "shared/constants"
 import { SocketServer } from "./../sockets/SocketServer";
 
 export class GameLobbyController {
@@ -13,8 +14,8 @@ export class GameLobbyController {
 
             workflow.leaveGameLobby(id, player,
                 (result) => {
-                    SocketServer.broadcast<IGame>("gameUpdated", result, "dashboardLobby");
-                    SocketServer.io.to(`gameLobby#${id}`).emit("playerLeftGame", { name: player.name });
+                    SocketServer.broadcast<IGame>(SocketEventNames.Server.gameUpdated, result, "dashboardLobby");
+                    SocketServer.io.to(`gameLobby#${id}`).emit(SocketEventNames.Server.playerLeftGame, { name: player.name });
                     res.send(result);
                 },
                 (error) => {
@@ -35,9 +36,9 @@ export class GameLobbyController {
 
             workflow.joinGameLobby(id, player,
                 (result, resume) => {
-                    SocketServer.broadcast<IGame>("gameUpdated", result, "dashboardLobby");
+                    SocketServer.broadcast<IGame>(SocketEventNames.Server.gameUpdated, result, "dashboardLobby");
                     if (!resume)
-                        SocketServer.io.to(`gameLobby#${id}`).emit("playerJoinedGame", { name: player.name });
+                        SocketServer.io.to(`gameLobby#${id}`).emit(SocketEventNames.Server.playerJoinedGame, { name: player.name });
 
                     res.send(result);
                 },
@@ -55,7 +56,7 @@ export class GameLobbyController {
         try {
             let id: string = req.params.id;
 
-            SocketServer.io.to(`gameLobby#${id}`).emit("gameLaunchInitialized", {});
+            SocketServer.io.to(`gameLobby#${id}`).emit(SocketEventNames.Server.gameLaunchInitialized, {});
         }
         catch (e) {
             console.log(e);

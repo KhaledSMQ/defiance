@@ -4,22 +4,26 @@ export class SocketEventNames {
     static Server: ServerSocketEventNames = new ServerSocketEventNames();
 }
 
-export class SharedSocketEventNames {
-    gameCreated: string = "gameCreated";
-     gameUpdated: string = "gameUpdated";
+class SharedSocketEventNames {
 }
 
 export class ClientSocketEventNames extends SharedSocketEventNames {
     joinLobby: string = "joinLobby";
+    leaveLobby: string = "leaveLobby";
     joinGame: string = "joinGame";
+    leaveGame: string = "leaveGame";
+    playVote: string = "playVote";
     playerReadyStateChange: string = "playerReadyStateChange";
 }
 
 export class ServerSocketEventNames extends SharedSocketEventNames {
+    gameCreated: string = "gameCreated";
+    gameUpdated: string = "gameUpdated";
     playerJoinedGame: string = "playerJoinedGame";
     playerLeftGame: string = "playerLeftGame";
     playerChangedReadyState: string = "playerChangedReadyState";
     gameLaunchInitialized: string = "gameLaunchInitialized";
+    playerVotePlayed: string = "playerVotePlayed";
 }
 
 Object.seal(ClientSocketEventNames);
