@@ -4,21 +4,21 @@ import { PlayerInfo } from "shared/models";
 export class PlayerInfoCacheService {
     private static _cache: { [id: string]: PlayerInfo } = {};
 
-    get cache(): { [gameId: string]: PlayerInfo } {
+    get cache(): { [id: string]: PlayerInfo } {
         return PlayerInfoCacheService._cache;
     }
 
-    get(playerName: string): PlayerInfo {
+    get(name: string): PlayerInfo {
         let playerInfo: PlayerInfo;
-        if (!this.cache[playerName]) {
-            this.set(playerName, { ready: false });
+        if (!this.cache[name]) {
+            this.set(name, { ready: false });
         }
 
-        playerInfo = this.cache[playerName];
+        playerInfo = this.cache[name];
         return playerInfo;
     }
 
-    set(playerName: string, model: PlayerInfo): void {
-        this.cache[playerName] = model;
+    set(name: string, model: PlayerInfo): void {
+        this.cache[name] = model;
     }
 }

@@ -1,0 +1,3 @@
+
+
+export { TeamAssignmentComponent } from "./TeamAssignmentComponent";

@@ -1,6 +1,6 @@
 
 
 export enum Faction {
-    Knights,
-    Minions
+    Good,
+    Evil
 }

@@ -4,7 +4,7 @@ import { GamePlayData } from "shared/models";
 export class GamePlayDataCacheService {
     private static _cache: { [id: string]: GamePlayData } = {};
 
-    get cache(): { [gameId: string]: GamePlayData } {
+    get cache(): { [id: string]: GamePlayData } {
         return GamePlayDataCacheService._cache;
     }
 
@@ -18,7 +18,7 @@ export class GamePlayDataCacheService {
         return playerInfo;
     }
 
-    set(playerName: string, model: GamePlayData): void {
-        this.cache[playerName] = model;
+    set(id: string, model: GamePlayData): void {
+        this.cache[id] = model;
     }
 }

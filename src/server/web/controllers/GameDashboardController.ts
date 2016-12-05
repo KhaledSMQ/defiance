@@ -1,6 +1,6 @@
 
 import * as express from "express";
-import { GameDashboardWorkflow } from "../../app/workflows/GameDashboardWorkflow";
+import { GameManagementWorkflow } from "../../app/workflows";
 import { IGame } from "shared/models";
 import { SocketEventNames } from "../../../shared/constants"
 import { SocketServer } from "../../sockets/SocketServer";
@@ -9,7 +9,7 @@ export class GameDashboardController {
     create(req: express.Request, res: express.Response): void {
         try {
             let game: IGame = <IGame>req.body;
-            let workflow = new GameDashboardWorkflow();
+            let workflow = new GameManagementWorkflow();
 
             workflow.createGame(game,
                 (result) => {
@@ -27,7 +27,7 @@ export class GameDashboardController {
 
     retrieve(req: express.Request, res: express.Response): void {
         try {
-            let workflow = new GameDashboardWorkflow();
+            let workflow = new GameManagementWorkflow();
 
             workflow.retrieveAllGames(
                 (result) => {
@@ -45,7 +45,7 @@ export class GameDashboardController {
     findById(req: express.Request, res: express.Response): void {
         try {
             let id: string = req.params.id;
-            let workflow = new GameDashboardWorkflow();
+            let workflow = new GameManagementWorkflow();
 
             workflow.retrieveGameById(id,
                 (result) => {

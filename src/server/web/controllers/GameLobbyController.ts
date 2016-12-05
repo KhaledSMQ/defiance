@@ -1,7 +1,7 @@
 
 import * as express from "express";
-import { GameLobbyWorkflow } from "../../app/workflows/GameLobbyWorkflow";
-import { IGame, IPlayer } from "shared/models";
+import { Game, IGame, IPlayer } from "../../../shared/models";
+import { GameManagementWorkflow, GameLobbyWorkflow, GamePlayWorkflow } from "../../app/workflows";
 import { SocketEventNames } from "../../../shared/constants"
 import { SocketServer } from "../../sockets/SocketServer";
 
@@ -57,6 +57,14 @@ export class GameLobbyController {
             let id: string = req.params.id;
 
             SocketServer.io.to(`gameLobby#${id}`).emit(SocketEventNames.Server.gameLaunchInitialized, {});
+
+            let managementWorkflow = new GameManagementWorkflow();
+
+            managementWorkflow.retrieveGameById(id, (result: IGame) => {
+                let workflow = new GamePlayWorkflow();
+
+                workflow.generateGamePlayData(<Game>result);
+            });
         }
         catch (e) {
             console.log(e);

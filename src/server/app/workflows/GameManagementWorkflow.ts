@@ -2,7 +2,7 @@
 import { GameBusiness } from "../../data/business/GameBusiness";
 import { IGame } from "shared/models";
 
-export class GameDashboardWorkflow {
+export class GameManagementWorkflow {
     retrieveGameById(id: string, successCallback: (result: IGame) => void, errorCallback?: (error: any) => void) {
         var gameBusiness = new GameBusiness();
         gameBusiness.findById(id, (error, result) => {

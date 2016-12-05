@@ -1,8 +1,7 @@
 
 import * as express from "express";
 import { IPlayer } from "shared/models";
-import { PlayerBusiness } from "../../data/business/PlayerBusiness";
-import { PlayerManagementWorkflow } from "../../app/workflows/PlayerManagementWorkflow";
+import { PlayerManagementWorkflow } from "../../app/workflows";
 
 export class PlayerManagementController {
     create(req: express.Request, res: express.Response): void {
