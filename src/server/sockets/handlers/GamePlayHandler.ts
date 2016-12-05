@@ -1,6 +1,6 @@
 
 import { ISocketHandler } from "../interfaces/ISocketHandler";
-import { SocketEventNames } from "shared/constants"
+import { SocketEventNames } from "../../../shared/constants"
 
 
 export class GamePlayHandler implements ISocketHandler {

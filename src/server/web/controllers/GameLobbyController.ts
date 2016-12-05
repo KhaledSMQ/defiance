@@ -2,7 +2,7 @@
 import * as express from "express";
 import { GameLobbyWorkflow } from "../../app/workflows/GameLobbyWorkflow";
 import { IGame, IPlayer } from "shared/models";
-import { SocketEventNames } from "shared/constants"
+import { SocketEventNames } from "../../../shared/constants"
 import { SocketServer } from "../../sockets/SocketServer";
 
 export class GameLobbyController {

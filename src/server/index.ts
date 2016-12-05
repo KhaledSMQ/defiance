@@ -1,6 +1,6 @@
 /// <reference path="./typings/index.d.ts" />
 
-import { ExpressServer } from "./web/server";
+import { ExpressServer } from "./web/ExpressServer";
 import * as http from "http";
 import * as socketIO from "socket.io";
 import { SocketServer } from "./sockets/SocketServer";

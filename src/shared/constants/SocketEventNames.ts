@@ -1,9 +1,4 @@
 
-export class SocketEventNames {
-    static Client: ClientSocketEventNames = new ClientSocketEventNames();
-    static Server: ServerSocketEventNames = new ServerSocketEventNames();
-}
-
 class SharedSocketEventNames {
 }
 
@@ -24,6 +19,11 @@ export class ServerSocketEventNames extends SharedSocketEventNames {
     playerChangedReadyState: string = "playerChangedReadyState";
     gameLaunchInitialized: string = "gameLaunchInitialized";
     playerVotePlayed: string = "playerVotePlayed";
+}
+
+export class SocketEventNames {
+    static Client: ClientSocketEventNames = new ClientSocketEventNames();
+    static Server: ServerSocketEventNames = new ServerSocketEventNames();
 }
 
 Object.seal(ClientSocketEventNames);
