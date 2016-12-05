@@ -1,6 +1,6 @@
 
 import { IPipelineComponent } from "./components/IPipelineComponent";
-import { IGame, GamePlayData } from "../../../shared/models";
+import { Game, GamePlayData } from "../../../shared/models";
 
 export class GamePipeline {
     private components: IPipelineComponent[] = [];
@@ -9,7 +9,7 @@ export class GamePipeline {
         this.components.push(component);
     }
 
-    setupGame(game: IGame): GamePlayData {
+    setupGame(game: Game): GamePlayData {
         let gamePlayData: GamePlayData = new GamePlayData();
         this.performOnComponents((c) => c.setupGame(game, gamePlayData));
 

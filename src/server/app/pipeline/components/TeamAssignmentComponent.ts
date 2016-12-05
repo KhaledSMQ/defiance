@@ -1,7 +1,7 @@
 
 import { BaseComponent } from "./BaseComponent";
 import { GameData } from "../../../../shared/constants/GameData";
-import { IGame, GamePlayData, Role, Faction } from "../../../../shared/models";
+import { Game, GamePlayData, Role, Faction } from "../../../../shared/models";
 
 export class TeamAssignmentComponent extends BaseComponent {
 
@@ -15,7 +15,7 @@ export class TeamAssignmentComponent extends BaseComponent {
         this.numberOfPlayers = numberOfPlayers;
     }
 
-    setupGame(game: IGame, gamePlayData: GamePlayData) {
+    setupGame(game: Game, gamePlayData: GamePlayData) {
         let players: string[] = game.players;
         let currentEvil: number = 0;
 

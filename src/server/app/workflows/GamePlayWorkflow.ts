@@ -2,7 +2,7 @@
 import { GamePipeline } from "../pipeline/GamePipeline";
 import { TeamAssignmentComponent } from "../pipeline/components";
 import { GamePlayDataCacheService } from "../services/GamePlayDataCacheService";
-import { IGame, GamePlayData } from "shared/models";
+import { Game, GamePlayData } from "shared/models";
 
 
 export class GamePlayWorkflow {
@@ -12,15 +12,17 @@ export class GamePlayWorkflow {
         this.gamePlayDataCacheService = new GamePlayDataCacheService();
     }
 
-    setupPipeline(game: IGame): GamePipeline {
+    setupPipeline(game: Game): GamePipeline {
         let pipeline: GamePipeline = new GamePipeline();
 
         pipeline.addComponent(new TeamAssignmentComponent(game.numberOfPlayers));
 
+
+
         return pipeline;
     }
 
-    generateGamePlayData(game: IGame): GamePlayData {
+    generateGamePlayData(game: Game): GamePlayData {
         let pipeline = this.setupPipeline(game);
         let gamePlayData = pipeline.setupGame(game);
 

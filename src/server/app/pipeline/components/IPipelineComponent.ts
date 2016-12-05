@@ -1,6 +1,6 @@
 
-import { IGame, GamePlayData } from "shared/models";
+import { Game, GamePlayData } from "shared/models";
 
 export interface IPipelineComponent {
-    setupGame(game: IGame, gamePlayData: GamePlayData): GamePlayData;
+    setupGame(game: Game, gamePlayData: GamePlayData): GamePlayData;
 }
