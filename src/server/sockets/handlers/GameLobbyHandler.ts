@@ -1,14 +1,14 @@
 
 import { ISocketHandler } from "../interfaces/ISocketHandler";
-import { PlayerInfoService } from "../../app/services/PlayerInfoService";
+import { PlayerInfoCacheService } from "../../app/services/PlayerInfoCacheService";
 import { SocketEventNames } from "../../../shared/constants"
 
 export class GameLobbyHandler implements ISocketHandler {
     socket: SocketIO.Socket;
-    playerInfoService: PlayerInfoService;
+    playerInfoService: PlayerInfoCacheService;
 
     onRegister(io: SocketIO.Server, socket: SocketIO.Socket) {
-        this.playerInfoService = new PlayerInfoService();
+        this.playerInfoService = new PlayerInfoCacheService();
         this.socket = socket;
 
         socket.join("gameLobby")
