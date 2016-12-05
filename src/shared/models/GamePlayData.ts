@@ -15,6 +15,8 @@ export class GamePlayData {
 
     teams: { [missionNumber: number]: TeamResult[] } = {};
 
+    oaths: { [player: string]: string[] } = {};
+
     winner: Faction = null;
 
     playerTurnOrder: string[] = [];

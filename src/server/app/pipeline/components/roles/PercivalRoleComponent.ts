@@ -21,7 +21,26 @@ export class PercivalRoleComponent extends BaseComponent {
             let random: number = Math.floor(Math.random() * goodGenericPlayers.length);
             gamePlayData.assignedRoles[goodGenericPlayers[random]] = Roles.Percival;
         }
-        
+
+        return gamePlayData;
+    }
+
+    setupOath(gamePlayData: GamePlayData): GamePlayData {
+        let knownPlayers: string[] = [];
+        let percivalPlayer: string;
+
+        for (let player in gamePlayData.assignedRoles) {
+            let role: Role = gamePlayData.assignedRoles[player];
+
+            if (role.name === Roles.Morgana.name || role.name === Roles.Merlin.name)
+                knownPlayers.push(player);
+
+            if (role.name === Roles.Percival.name)
+                percivalPlayer = player;
+        }
+
+        gamePlayData.oaths[percivalPlayer] = knownPlayers;
+
         return gamePlayData;
     }
 }

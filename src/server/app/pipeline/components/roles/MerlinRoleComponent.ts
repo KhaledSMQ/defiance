@@ -21,7 +21,26 @@ export class MerlinRoleComponent extends BaseComponent {
             let random: number = Math.floor(Math.random() * goodGenericPlayers.length);
             gamePlayData.assignedRoles[goodGenericPlayers[random]] = Roles.Merlin;
         }
-        
+
+        return gamePlayData;
+    }
+
+    setupOath(gamePlayData: GamePlayData): GamePlayData {
+        let evilPlayers: string[] = [];
+        let merlinPlayer: string;
+
+        for (let player in gamePlayData.assignedRoles) {
+            let role: Role = gamePlayData.assignedRoles[player];
+
+            if (role.faction === Faction.Evil && role.name !== Roles.Mordred.name)
+                evilPlayers.push(player);
+
+            if (role.name === Roles.Merlin.name)
+                merlinPlayer = player;
+        }
+
+        gamePlayData.oaths[merlinPlayer] = evilPlayers;
+
         return gamePlayData;
     }
 }

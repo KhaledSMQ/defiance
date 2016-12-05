@@ -20,8 +20,10 @@ export class GamePipeline {
 
     }
 
-    assignRoles(gamePlayData: GamePlayData) {
+    setupOath(gamePlayData: GamePlayData): GamePlayData {
+        this.performOnComponents((c) => c.setupOath(gamePlayData));
 
+        return gamePlayData;
     }
 
     processPreGame(gamePlayData: GamePlayData) {

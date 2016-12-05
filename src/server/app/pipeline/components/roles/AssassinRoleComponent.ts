@@ -1,9 +1,9 @@
 
-import { BaseComponent } from "../BaseComponent";
+import { EvilRoleComponent } from "./EvilRoleComponent";
 import { Roles, GameData } from "../../../../../shared/constants";
 import { Game, GamePlayData, Role, Faction } from "../../../../../shared/models";
 
-export class AssassinRoleComponent extends BaseComponent {
+export class AssassinRoleComponent extends EvilRoleComponent {
     constructor() {
         super();
     }
@@ -24,4 +24,5 @@ export class AssassinRoleComponent extends BaseComponent {
 
         return gamePlayData;
     }
+
 }

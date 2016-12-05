@@ -8,14 +8,10 @@ export class GamePlayDataCacheService {
         return GamePlayDataCacheService._cache;
     }
 
-    get(playerName: string): GamePlayData {
-        let playerInfo: GamePlayData;
-        if (!this.cache[playerName]) {
-
-        }
-
-        playerInfo = this.cache[playerName];
-        return playerInfo;
+    get(id: string): GamePlayData {
+        let gamePlayData: GamePlayData;
+        gamePlayData = this.cache[id];
+        return gamePlayData;
     }
 
     set(id: string, model: GamePlayData): void {

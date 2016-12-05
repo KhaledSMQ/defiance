@@ -1,6 +1,7 @@
 
 import { GamePipeline } from "../pipeline/GamePipeline";
 import {
+    GoodRoleComponent, EvilRoleComponent,
     GameSetupComponent, TeamAssignmentComponent, MerlinRoleComponent, MordredRoleComponent,
     AssassinRoleComponent, MorganaRoleComponent, OberonRoleComponent, PercivalRoleComponent
 } from "../pipeline/components";
@@ -22,6 +23,9 @@ export class GamePlayWorkflow {
 
         pipeline.addComponent(new GameSetupComponent());
         pipeline.addComponent(new TeamAssignmentComponent(game.numberOfPlayers));
+
+        pipeline.addComponent(new GoodRoleComponent());
+        pipeline.addComponent(new EvilRoleComponent());
 
         if (game.roles.contains(Roles.Merlin.name))
             pipeline.addComponent(new MerlinRoleComponent());
@@ -45,6 +49,15 @@ export class GamePlayWorkflow {
         let gamePlayData = pipeline.setupGame(game);
 
         this.gamePlayDataCacheService.set(<string>game._id, gamePlayData);
+        console.log(gamePlayData);
+
+        return gamePlayData;
+    }
+
+    generateOathData(game: Game): GamePlayData {
+        let gamePlayData: GamePlayData = this.gamePlayDataCacheService.get(<string>game._id);
+        let pipeline = this.setupPipeline(game);
+        gamePlayData = pipeline.setupOath(gamePlayData);
 
         console.log(gamePlayData);
 

@@ -64,6 +64,7 @@ export class GameLobbyController {
                 let workflow = new GamePlayWorkflow();
 
                 workflow.generateGamePlayData(<Game>result);
+                workflow.generateOathData(<Game>result);
             });
         }
         catch (e) {

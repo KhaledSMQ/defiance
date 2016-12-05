@@ -17,6 +17,8 @@ export class GamePlayComponent implements OnInit {
 
     game: Game;
 
+    oath: string[];
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -29,7 +31,9 @@ export class GamePlayComponent implements OnInit {
             .then(game => {
                 this.game = game;
                 //this.playData = new GamePlayData(game);
-                this.socketService.send(SocketEventNames.Client.joinGame, { game: game._id });
+                this.socketService.send<any, string[]>(SocketEventNames.Client.joinGame, { game: game._id, player: SessionInfo.Player.name }, (data) => {
+                    this.oath = data;
+                });
             });
     }
 }

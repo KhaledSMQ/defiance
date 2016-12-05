@@ -35,5 +35,5 @@ export class TeamAssignmentComponent extends BaseComponent {
         return gamePlayData;
     }
 
-
+    
 }
