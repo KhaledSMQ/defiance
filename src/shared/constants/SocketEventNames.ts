@@ -1,20 +1,27 @@
 
-
 export class SocketEventNames {
-
-    private static _client: { [name: string]: string } = {
-        sendDataToServer: "dataToServer"
-    }
-
-    private static _server: { [name: string]: string } = {
-        sendDataToClient: "dataToClient"
-    }
-
-    static get client(): { [name: string]: string } {
-        return SocketEventNames._client;
-    }
-
-    static get server(): { [name: string]: string } {
-        return SocketEventNames._server;
-    }
+    static Client: ClientSocketEventNames = new ClientSocketEventNames();
+    static Server: ServerSocketEventNames = new ServerSocketEventNames();
 }
+
+export class SharedSocketEventNames {
+    gameCreated: string = "gameCreated";
+     gameUpdated: string = "gameUpdated";
+}
+
+export class ClientSocketEventNames extends SharedSocketEventNames {
+    joinLobby: string = "joinLobby";
+    joinGame: string = "joinGame";
+    playerReadyStateChange: string = "playerReadyStateChange";
+}
+
+export class ServerSocketEventNames extends SharedSocketEventNames {
+    playerJoinedGame: string = "playerJoinedGame";
+    playerLeftGame: string = "playerLeftGame";
+    playerChangedReadyState: string = "playerChangedReadyState";
+    gameLaunchInitialized: string = "gameLaunchInitialized";
+}
+
+Object.seal(ClientSocketEventNames);
+Object.seal(ServerSocketEventNames);
+Object.seal(SocketEventNames);
