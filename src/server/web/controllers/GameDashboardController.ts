@@ -1,9 +1,9 @@
 
 import * as express from "express";
-import { GameDashboardWorkflow } from "../workflows/GameDashboardWorkflow";
+import { GameDashboardWorkflow } from "../../app/workflows/GameDashboardWorkflow";
 import { IGame } from "shared/models";
 import { SocketEventNames } from "shared/constants"
-import { SocketServer } from "./../sockets/SocketServer";
+import { SocketServer } from "../../sockets/SocketServer";
 
 export class GameDashboardController {
     create(req: express.Request, res: express.Response): void {

@@ -1,9 +1,7 @@
-/// <reference path="./typings/index.d.ts" />
-
 import * as express from 'express';
 import * as bodyParser from "body-parser";
 import * as path from 'path';
-import { Routes } from "./config/routes/Routes";
+import { Routes } from "./routes/Routes";
 
 export class ExpressServer {
     app: express.Express;

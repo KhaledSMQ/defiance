@@ -1,7 +1,7 @@
 
 import * as express from "express";
-import { GameDashboardController } from "../../controllers/GameDashboardController";
-import { GameLobbyController } from "../../controllers/GameLobbyController";
+import { GameDashboardController } from "../controllers/GameDashboardController";
+import { GameLobbyController } from "../controllers/GameLobbyController";
 
 var router = express.Router();
 export class GameRoutes {

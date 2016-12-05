@@ -1,6 +1,6 @@
 
 import * as express from "express";
-import { PlayerManagementController } from "../../controllers/PlayerManagementController";
+import { PlayerManagementController } from "../controllers/PlayerManagementController";
 
 var router = express.Router();
 export class PlayerRoutes {

@@ -1,6 +1,6 @@
 
 import * as mongoose from "mongoose";
-import { Constants } from "../../config/constants/constants";
+import { Constants } from "../../constants/constants";
 
 export class DataAccess {
     static mongooseInstance: any;

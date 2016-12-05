@@ -1,9 +1,9 @@
+/// <reference path="./typings/index.d.ts" />
 
-import { ExpressServer } from "./server";
+import { ExpressServer } from "./web/server";
 import * as http from "http";
 import * as socketIO from "socket.io";
 import { SocketServer } from "./sockets/SocketServer";
-import { DataAccess } from "./app/dataAccess/DataAccess";
 
 var app = new ExpressServer().app;
 var server = http.createServer(app);

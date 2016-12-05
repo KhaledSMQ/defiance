@@ -1,5 +1,5 @@
 
-import { GameBusiness } from "../app/business/GameBusiness";
+import { GameBusiness } from "../../data/business/GameBusiness";
 import { IGame, IPlayer } from "shared/models";
 
 export class GameLobbyWorkflow {

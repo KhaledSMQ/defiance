@@ -1,5 +1,5 @@
 
-import { PlayerBusiness } from "../app/business/PlayerBusiness";
+import { PlayerBusiness } from "../../data/business/PlayerBusiness";
 import { IPlayer } from "shared/models";
 
 export class PlayerManagementWorkflow {

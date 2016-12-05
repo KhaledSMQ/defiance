@@ -1,6 +1,6 @@
 
 import { ISocketHandler } from "../interfaces/ISocketHandler";
-import { PlayerInfoService } from "../../services/PlayerInfoService";
+import { PlayerInfoService } from "../../app/services/PlayerInfoService";
 import { SocketEventNames } from "shared/constants"
 
 export class GameLobbyHandler implements ISocketHandler {

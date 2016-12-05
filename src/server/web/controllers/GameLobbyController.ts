@@ -1,9 +1,9 @@
 
 import * as express from "express";
-import { GameLobbyWorkflow } from "../workflows/GameLobbyWorkflow";
+import { GameLobbyWorkflow } from "../../app/workflows/GameLobbyWorkflow";
 import { IGame, IPlayer } from "shared/models";
 import { SocketEventNames } from "shared/constants"
-import { SocketServer } from "./../sockets/SocketServer";
+import { SocketServer } from "../../sockets/SocketServer";
 
 export class GameLobbyController {
     leaveGameLobby(req: express.Request, res: express.Response): void {
