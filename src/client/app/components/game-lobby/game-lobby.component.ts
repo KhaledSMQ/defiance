@@ -1,9 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GameLobbyData } from "shared/models/game-lobby-data";
-import { Player } from "shared/models/player";
-import { PlayerInfo } from "shared/models/player-info";
+import { GameLobbyData, Player, PlayerInfo } from "shared/models";
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { SessionInfo } from "../../session/session-info";

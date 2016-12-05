@@ -1,5 +1,5 @@
 
-import { Player } from "shared/models/player";
+import { Player } from "shared/models";
 
 export class SessionInfo {
 

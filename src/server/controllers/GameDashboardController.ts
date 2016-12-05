@@ -1,7 +1,7 @@
 
 import * as express from "express";
 import { GameDashboardWorkflow } from "../workflows/GameDashboardWorkflow";
-import { IGame } from "shared/models/IGame";
+import { IGame } from "shared/models";
 import { SocketServer } from "./../sockets/SocketServer";
 
 export class GameDashboardController {

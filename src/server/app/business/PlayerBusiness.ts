@@ -1,7 +1,7 @@
 
 import { PlayerRepository } from "./../repository/PlayerRepository";
 import { IBaseBusiness } from "./interfaces/IBaseBusiness";
-import { IPlayer } from "shared/models/IPlayer";
+import { IPlayer } from "shared/models";
 import { PlayerModel } from "../models/PlayerModel";
 
 export class PlayerBusiness implements IBaseBusiness<IPlayer> {

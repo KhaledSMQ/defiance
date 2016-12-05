@@ -1,8 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Game } from "shared/models/game";
-import { GamePlayData } from "shared/models/game-play-data";
+import { Game, GamePlayData } from "shared/models";
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { SessionInfo } from "../../session/session-info";

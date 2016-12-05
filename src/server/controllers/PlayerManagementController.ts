@@ -1,6 +1,6 @@
 
 import * as express from "express";
-import { IPlayer } from "shared/models/IPlayer";
+import { IPlayer } from "shared/models";
 import { PlayerBusiness } from "../app/business/PlayerBusiness";
 import { PlayerManagementWorkflow } from "../workflows/PlayerManagementWorkflow";
 

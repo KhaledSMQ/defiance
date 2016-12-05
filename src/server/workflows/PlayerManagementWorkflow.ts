@@ -1,6 +1,6 @@
 
 import { PlayerBusiness } from "../app/business/PlayerBusiness";
-import { IPlayer } from "shared/models/IPlayer";
+import { IPlayer } from "shared/models";
 
 export class PlayerManagementWorkflow {
     create(player: IPlayer, successCallback: (player: any) => void, errorCallback?: (error: any) => void) {

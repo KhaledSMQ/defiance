@@ -1,6 +1,6 @@
 
 import { GameBusiness } from "../app/business/GameBusiness";
-import { IGame } from "shared/models/IGame";
+import { IGame } from "shared/models";
 
 export class GameDashboardWorkflow {
     retrieveGameById(id: string, successCallback: (result: IGame) => void, errorCallback?: (error: any) => void) {

@@ -1,7 +1,7 @@
 
 import { GameRepository } from "./../repository/GameRepository";
 import { IBaseBusiness } from "./interfaces/IBaseBusiness";
-import { IGame } from "shared/models/IGame";
+import { IGame } from "shared/models";
 import { GameModel } from "../models/GameModel";
 
 export class GameBusiness implements IBaseBusiness<IGame> {

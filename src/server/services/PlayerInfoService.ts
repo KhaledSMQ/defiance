@@ -1,5 +1,5 @@
 
-import { PlayerInfo } from "shared/models/player-info";
+import { PlayerInfo } from "shared/models";
 
 export class PlayerInfoService {
 

@@ -1,8 +1,7 @@
 
 import { Injectable } from '@angular/core';
 import { RestService } from "./rest.service";
-import { Game } from "shared/models/game";
-import { Player } from "shared/models/player";
+import { Game, Player } from "shared/models";
 
 @Injectable()
 export class GameService {

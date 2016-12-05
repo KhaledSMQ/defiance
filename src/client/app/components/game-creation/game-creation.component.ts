@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
-import { Game } from "shared/models/game";
+import { Game } from "shared/models";
 import { SessionInfo } from "../../session/session-info";
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';

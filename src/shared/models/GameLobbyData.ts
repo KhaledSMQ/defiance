@@ -1,6 +1,6 @@
 
-import { Game } from "./game";
-import { PlayerInfo } from "./player-info";
+import { Game } from "./Game";
+import { PlayerInfo } from "./PlayerInfo";
 
 export class GameLobbyData {
 
