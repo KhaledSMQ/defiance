@@ -12,22 +12,22 @@ export class ExpressServer {
         this.app = express();
         this.app.set('port', this.port);
 
-        this.app.use('/app', express.static(path.resolve(__dirname, '../client/app')));
-        this.app.use('/libs', express.static(path.resolve(__dirname, '../client/libs')));
+        this.app.use('/app', express.static(path.resolve(__dirname, '../../client/app')));
+        this.app.use('/libs', express.static(path.resolve(__dirname, '../../client/libs')));
 
         // for registering https
-        this.app.use('/.well-known', express.static(path.resolve(__dirname, '../../.well-known')));
+        this.app.use('/.well-known', express.static(path.resolve(__dirname, '../../../.well-known')));
 
         // for system.js to work. Can be removed if bundling.
-        this.app.use(express.static(path.resolve(__dirname, '../client')));
-        this.app.use('/shared', express.static(path.resolve(__dirname, '../shared')));
-        this.app.use(express.static(path.resolve(__dirname, '../../node_modules')));
+        this.app.use(express.static(path.resolve(__dirname, '../../client')));
+        this.app.use('/shared', express.static(path.resolve(__dirname, '../../shared')));
+        this.app.use(express.static(path.resolve(__dirname, '../../../node_modules')));
 
         this.app.use(bodyParser.json());
         this.app.use('/api', new Routes().routes);
 
         var renderIndex = (req: express.Request, res: express.Response) => {
-            res.sendFile(path.resolve(__dirname, '../client/index.html'));
+            res.sendFile(path.resolve(__dirname, '../../client/index.html'));
         }
 
         this.app.get('/*', renderIndex);
