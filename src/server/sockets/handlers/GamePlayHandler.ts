@@ -2,7 +2,7 @@
 import { ISocketHandler } from "../interfaces/ISocketHandler";
 import { SocketEventNames } from "../../../shared/constants"
 import { GamePlayDataCacheService } from "../../app/services/GamePlayDataCacheService";
-
+import { BeginGameTransportModel, JoinGameTransportModel } from "../../../shared/models/transport"
 
 export class GamePlayHandler implements ISocketHandler {
     socket: SocketIO.Socket;
@@ -22,12 +22,15 @@ export class GamePlayHandler implements ISocketHandler {
         this.socket.leave(`gamePlay#${data.game}`);
     }
 
-    joinGame(data: any, callback: (data) => void) {
+    joinGame(data: JoinGameTransportModel, callback: (data : BeginGameTransportModel) => void) {
         this.socket.join(`gamePlay#${data.game}`);
 
-        let gamePlayData = this.gamePlayDataCache.get(data.game);
+        let gamePlayData = this.gamePlayDataCache.get(<string>data.game);
 
-        callback(gamePlayData.oaths[data.player]);
+        callback({
+            oath: gamePlayData.oaths[data.player],
+            role: gamePlayData.assignedRoles[data.player]
+        });
     }
 
     playVote(data: any, callback: (data: any) => void) {

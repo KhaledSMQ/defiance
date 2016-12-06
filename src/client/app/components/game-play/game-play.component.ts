@@ -1,8 +1,9 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Game, GamePlayData } from "shared/models";
+import { Game, GamePlayData, Role } from "shared/models";
 import { SocketEventNames } from "shared/constants"
+import { JoinGameTransportModel, BeginGameTransportModel } from "shared/models/transport";
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { SessionInfo } from "../../session/session-info";
@@ -18,6 +19,7 @@ export class GamePlayComponent implements OnInit {
     game: Game;
 
     oath: string[];
+    role: Role;
 
     constructor(
         private route: ActivatedRoute,
@@ -30,9 +32,10 @@ export class GamePlayComponent implements OnInit {
         this.gameService.getGame(this.route.snapshot.params['id'])
             .then(game => {
                 this.game = game;
-                //this.playData = new GamePlayData(game);
-                this.socketService.send<any, string[]>(SocketEventNames.Client.joinGame, { game: game._id, player: SessionInfo.Player.name }, (data) => {
-                    this.oath = data;
+
+                this.socketService.send<JoinGameTransportModel, BeginGameTransportModel>(SocketEventNames.Client.joinGame, { game: game._id, player: SessionInfo.Player.name }, (data) => {
+                    this.oath = data.oath;
+                    this.role = data.role;
                 });
             });
     }
