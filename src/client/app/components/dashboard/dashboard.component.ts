@@ -2,8 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
-import { Game } from "shared/models/game";
-import { Player } from "shared/models/player";
+import { Game, Player } from "shared/models";
+import { SocketEventNames } from "shared/constants"
 import { Router } from '@angular/router';
 import { SessionInfo } from "../../session/session-info";
 
@@ -29,14 +29,14 @@ export class DashboardComponent implements OnInit {
         private gameService: GameService,
         private socketService: SocketService) { }
 
-    getGames() {
+    getGames() { 
         this.gameService.getGames().then(games => this.games = games);
     }
-
-    ngOnInit() {
+ 
+    ngOnInit() { 
         this.getGames();
-        this.socketService.subscribe<Game>("gameCreated", (data) => this.gameCreated(data));
-        this.socketService.subscribe<Game>("gameUpdated", (data) => this.gameUpdated(data));
+        this.socketService.subscribe<Game>(SocketEventNames.Server.gameCreated, (data) => this.gameCreated(data));
+        this.socketService.subscribe<Game>(SocketEventNames.Server.gameUpdated, (data) => this.gameUpdated(data));
     }
 
     gameCreated(game: Game) {

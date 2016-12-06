@@ -2,7 +2,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from "../../services/player.service";
 import { CookieService } from "angular2-cookie/core";
-import { Player } from "shared/models/player";
+import { Player } from "shared/models";
 import { Router } from '@angular/router';
 import { Constants } from "../../constants/constants";
 import { SessionInfo } from "../../session/session-info";

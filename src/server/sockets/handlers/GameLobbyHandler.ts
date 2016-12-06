@@ -1,24 +1,25 @@
 
 import { ISocketHandler } from "../interfaces/ISocketHandler";
-import { PlayerInfoService } from "../../services/PlayerInfoService";
+import { PlayerInfoCacheService } from "../../app/services/PlayerInfoCacheService";
+import { SocketEventNames } from "../../../shared/constants"
 
 export class GameLobbyHandler implements ISocketHandler {
     socket: SocketIO.Socket;
-    playerInfoService: PlayerInfoService;
+    playerInfoService: PlayerInfoCacheService;
 
     onRegister(io: SocketIO.Server, socket: SocketIO.Socket) {
-        this.playerInfoService = new PlayerInfoService();
+        this.playerInfoService = new PlayerInfoCacheService();
         this.socket = socket;
 
         socket.join("gameLobby")
-            .on("joinLobby", (data, cb) => this.joinLobby(data, cb))
-            .on("playerReadyStateChange", (data, cb) => this.changePlayerReadyState(data, cb))
-            .on("leaveLobby", (data) => this.leaveLobby(data));
+            .on(SocketEventNames.Client.joinLobby, (data, cb) => this.joinLobby(data, cb))
+            .on(SocketEventNames.Client.playerReadyStateChange, (data, cb) => this.changePlayerReadyState(data, cb))
+            .on(SocketEventNames.Client.leaveLobby, (data) => this.leaveLobby(data));
     }
 
     changePlayerReadyState(data: any, callback: (data: any) => void) {
-        this.socket.in(`gameLobby#${data.game}`).broadcast.emit("playerChangedReadyState", data);
-        let playerInfo = this.playerInfoService.getPlayerInfo(data.player);
+        this.socket.in(`gameLobby#${data.game}`).broadcast.emit(SocketEventNames.Server.playerChangedReadyState, data);
+        let playerInfo = this.playerInfoService.get(data.player);
         playerInfo.ready = data.ready;
         callback(data);
     }
@@ -30,6 +31,6 @@ export class GameLobbyHandler implements ISocketHandler {
     joinLobby(data: any, callback: (data: any) => void): void {
         this.socket.join(`gameLobby#${data.game}`);
 
-        callback(this.playerInfoService.playerInfoCache);
+        callback(this.playerInfoService.cache);
     }
 }

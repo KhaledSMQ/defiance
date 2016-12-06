@@ -1,9 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { GameLobbyData } from "shared/models/game-lobby-data";
-import { Player } from "shared/models/player";
-import { PlayerInfo } from "shared/models/player-info";
+import { GameLobbyData, Player, PlayerInfo } from "shared/models";
+import { SocketEventNames } from "shared/constants"
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { SessionInfo } from "../../session/session-info";
@@ -30,13 +29,13 @@ export class GameLobbyComponent implements OnInit {
         this.gameService.getGame(this.route.snapshot.params['id'])
             .then(game => {
                 this.lobby = new GameLobbyData(game);
-                this.socketService.send("joinLobby", { game: game._id }, (playerInfoMap: { [name: string]: PlayerInfo }) => this.updatePlayerInfo(playerInfoMap));
+                this.socketService.send(SocketEventNames.Client.joinLobby, { game: game._id }, (playerInfoMap: { [name: string]: PlayerInfo }) => this.updatePlayerInfo(playerInfoMap));
             });
 
-        this.socketService.subscribe("playerJoinedGame", (data) => this.playerJoinedGame(data));
-        this.socketService.subscribe("playerLeftGame", (data) => this.playerLeftGame(data));
-        this.socketService.subscribe("playerChangedReadyState", (data) => this.playerChangedReadyState(data))
-        this.socketService.subscribe("gameLaunchInitialized", (data) => this.gameLaunchInitialized(data));
+        this.socketService.subscribe(SocketEventNames.Server.playerJoinedGame, (data) => this.playerJoinedGame(data));
+        this.socketService.subscribe(SocketEventNames.Server.playerLeftGame, (data) => this.playerLeftGame(data));
+        this.socketService.subscribe(SocketEventNames.Server.playerChangedReadyState, (data) => this.playerChangedReadyState(data))
+        this.socketService.subscribe(SocketEventNames.Server.gameLaunchInitialized, (data) => this.gameLaunchInitialized(data));
     }
 
 
@@ -112,7 +111,7 @@ export class GameLobbyComponent implements OnInit {
     }
 
     toggleReady() {
-        this.socketService.send("playerReadyStateChange", {
+        this.socketService.send(SocketEventNames.Client.playerReadyStateChange, {
             player: SessionInfo.Player.name,
             game: this.lobby.game._id,
             ready: !this.playerReady

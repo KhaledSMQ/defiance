@@ -9,7 +9,9 @@
         "noImplicitAny": false,
         "baseUrl": ".",
         "paths": {
-            "shared/*": ["../shared/*"]
+            "shared/*": [
+                "../shared/*"
+            ]
         }
     },
     "exclude": [

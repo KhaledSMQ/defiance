@@ -1,8 +1,8 @@
 
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Game } from "shared/models/game";
-import { GamePlayData } from "shared/models/game-play-data";
+import { Game, GamePlayData } from "shared/models";
+import { SocketEventNames } from "shared/constants"
 import { GameService } from "../../services/game.service";
 import { SocketService } from "../../services/socket.service";
 import { SessionInfo } from "../../session/session-info";
@@ -17,6 +17,8 @@ export class GamePlayComponent implements OnInit {
 
     game: Game;
 
+    oath: string[];
+
     constructor(
         private route: ActivatedRoute,
         private router: Router,
@@ -29,7 +31,9 @@ export class GamePlayComponent implements OnInit {
             .then(game => {
                 this.game = game;
                 //this.playData = new GamePlayData(game);
-                this.socketService.send("joinGame", { game: game._id });
+                this.socketService.send<any, string[]>(SocketEventNames.Client.joinGame, { game: game._id, player: SessionInfo.Player.name }, (data) => {
+                    this.oath = data;
+                });
             });
     }
 }
