@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from "angular2-cookie/core";
-import { Player } from "./models/player";
+import { Player } from "shared/models";
 import { PlayerService } from "./services/player.service";
 import { Constants } from "./constants/constants";
 import { SessionInfo } from "./session/session-info";

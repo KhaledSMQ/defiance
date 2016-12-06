@@ -1,10 +1,7 @@
 
 import { Injectable } from '@angular/core';
-
 import { RestService } from "./rest.service";
-
-import { Game } from "../models/game";
-import { Player } from "../models/player";
+import { Game, Player } from "shared/models";
 
 @Injectable()
 export class GameService {
@@ -17,7 +14,11 @@ export class GameService {
         return this.restService.get<Game[]>(this.url);
     }
 
-    joinGame(game: Game, player: Player): Promise<Game> {
+    startGame(game: Game): Promise<Game> {
+        return this.restService.get<Game>(`${this.url}/${game._id}/start`);
+    }
+
+    joinGameLobby(game: Game, player: Player): Promise<Game> {
         return this.restService.put<Player, Game>(`${this.url}/${game._id}/join`, player);
     }
 

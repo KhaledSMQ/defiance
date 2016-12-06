@@ -24,3 +24,7 @@ h3 {
     cursor: pointer;
     color: white;
 }
+
+.ready { 
+    background-color: green;
+}

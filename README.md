@@ -16,6 +16,7 @@
 ```
     npm install ts-node -g
     npm install typescript-node -g
+    npm install gulp -g
 ```
 
 ## Steps to Run

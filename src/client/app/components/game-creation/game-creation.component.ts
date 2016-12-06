@@ -1,7 +1,7 @@
 
 import { Component, OnInit } from '@angular/core';
 import { GameService } from "../../services/game.service";
-import { Game } from "../../models/game";
+import { Game } from "shared/models";
 import { SessionInfo } from "../../session/session-info";
 import { Router } from '@angular/router';
 import 'rxjs/add/operator/toPromise';
@@ -34,7 +34,7 @@ export class GameCreationComponent implements OnInit {
                 if (res.error) {
 
                 } else {
-                    this.gameService.joinGame(createdGame, SessionInfo.Player).then(joinedGame => {
+                    this.gameService.joinGameLobby(createdGame, SessionInfo.Player).then(joinedGame => {
                         SessionInfo.GameActive = true;
                         this.router.navigate(['game', createdGame._id, 'lobby']);
                     });
@@ -59,6 +59,19 @@ export class GameCreationComponent implements OnInit {
 
     hasRole(role: string): boolean {
         return this.game.roles.indexOf(role) >= 0;
+    }
+
+    toggleItem(item: string): void {
+        if (this.hasItem(item)) {
+            let index: number = this.game.items.indexOf(item);
+            this.game.items.splice(index, 1);
+        } else {
+            this.game.items.push(item);
+        }
+    }
+
+    hasItem(item: string): boolean {
+        return this.game.items.indexOf(item) >= 0;
     }
 
     cancel(): void {

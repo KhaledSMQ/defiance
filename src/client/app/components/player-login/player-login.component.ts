@@ -2,15 +2,14 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { PlayerService } from "../../services/player.service";
 import { CookieService } from "angular2-cookie/core";
-import { Player } from "../../models/player";
+import { Player } from "shared/models";
 import { Router } from '@angular/router';
 import { Constants } from "../../constants/constants";
 import { SessionInfo } from "../../session/session-info";
 
 @Component({
     selector: 'player-login',
-    templateUrl: './app/components/player-login/player-login.component.html',
-    styleUrls: ['./app/components/player-login/player-login.component.css']
+    templateUrl: './app/components/player-login/player-login.component.html'
 })
 
 export class PlayerLoginComponent implements OnInit {
@@ -42,7 +41,7 @@ export class PlayerLoginComponent implements OnInit {
     }
 
     setPlayer(player: Player) {
-        this.cookieService.put(Constants.UserIdKey, player._id);
+        this.cookieService.put(Constants.UserIdKey, <string>player._id);
         SessionInfo.Player = player;
         this.loggedInChange.emit(true);
     }
